@@ -1,0 +1,2 @@
+class GoodValue < ApplicationRecord
+end

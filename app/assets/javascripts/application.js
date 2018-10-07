@@ -14,3 +14,10 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+//= require jquery
+//= require jquery_ujs
+$(function() {
+	$(document).on("ajax:success", ".new_item", function(e) {
+		$('body').html(e.detail[0]);
+	})
+})
