@@ -1,0 +1,8 @@
+<h1>商品一覧</h1>
+<% items.each do |item| %>
+	<%= item.name %>
+	<%= item.image_id %>
+	<%= item.price %>
+	<%= item.maker.name %>
+	<%= item.genre.name %>
+<% end %>
