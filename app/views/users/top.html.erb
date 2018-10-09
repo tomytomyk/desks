@@ -18,3 +18,5 @@
   <%= f.collection_select(:occupation_id, Occupation.all, :id, :name) %>
   <%= f.submit %>
 <% end %>
+
+<%= link_to "ログインせずに閲覧", reports_path %>
