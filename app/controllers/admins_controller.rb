@@ -13,6 +13,7 @@ class AdminsController < ApplicationController
            session[:admin_id] = admin.id
            redirect_to admins_index_path
         else
+           flash[:notice] = "名前かパスワードが違います。"
            redirect_to admins_top_path
         end
     end
@@ -29,6 +30,6 @@ class AdminsController < ApplicationController
 
     private
     def admin_params
-      params.require(:admin).permit(:name, :password, :admin_id)
+      params.require(:admin).permit(:name, :password)
     end
 end

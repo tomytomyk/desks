@@ -27,4 +27,9 @@
 
 <%= link_to "戻る", admins_index_path %>
 
+<div id="render-item">
 <%= render "admin/items/index", items: @items %>
+</div>
+<%= render "admin/items/genre", genres: @genres %>
+<%= render "admin/items/maker", makers: @makers %>
+<%= render "admin/items/occupation", occupations: @occupations %>

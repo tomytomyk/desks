@@ -1,0 +1,7 @@
+<h1>職種一覧</h1>
+<% occupations.each do |occupation| %>
+    <%= occupation.id %>
+    <%= occupation.name %>
+    <%= link_to "編集",edit_occupation_path(occupation) %>
+	<%= link_to "削除",destroy_occupation_path(occupation), method: :delete %>
+<% end %>

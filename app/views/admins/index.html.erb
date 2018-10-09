@@ -1,8 +1,6 @@
 <h1>ログインおめでとう！</h1>
 <%= link_to "情報登録ページ", new_admin_item_path %>
-<%= link_to "ジャンル、メーカー、職種一覧ページ", admins_other_path %>
 <%= link_to "ユーザー一覧", admin_users_path %>
-<%= link_to "商品一覧", admin_items_path %>
 <%= link_to "ログアウト", admins_top_path %>
 <%= @admin.id %>
 <%= session.to_hash %>
