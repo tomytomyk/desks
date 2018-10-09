@@ -18,6 +18,7 @@
 //= require jquery_ujs
 $(function() {
 	$(document).on("ajax:success", ".new_item", function(e) {
-		$('body').html(e.detail[0]);
+		var a = "idは" + e.detail +"です"
+		$('.add-item').html(a);
 	})
 })
