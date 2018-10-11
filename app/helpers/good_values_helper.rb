@@ -1,0 +1,2 @@
+module GoodValuesHelper
+end

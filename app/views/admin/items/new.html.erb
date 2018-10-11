@@ -1,8 +1,8 @@
 
 
-<%= form_for(@item, url: admin_items_path, remote: true) do |f| %>
+<%= form_for(@item, url: admin_items_path, remote: true,multipart: true) do |f| %>
   <%= f.text_field :name, placeholder: "名前" %>
-  <%= f.text_field :image_id, placeholder: "画像" %>
+  <%= f.file_field :image_id, placeholder: "画像" %>
   <%= f.number_field :price, placeholder: "値段" %>
   <%= f.collection_select( :maker_id, Maker.all, :id, :name) %>
   <%= f.collection_select( :genre_id, Genre.all, :id, :name) %>

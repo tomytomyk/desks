@@ -21,11 +21,14 @@ Rails.application.routes.draw do
   	resources :items
   	resources :users
   end
-
+  post "report/report_id/report_value" => "reports#value_create", as:"value"
   post "users/login" => "users#login"
   resources :items
   resources :reports
-  resources :users
+  resources :users do
+      get :follow, :follower
+  end
+  resources :relationships, only: [:create, :destroy]
 
 
 end

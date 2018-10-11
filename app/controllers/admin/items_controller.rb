@@ -14,9 +14,14 @@ class Admin::ItemsController < ApplicationController
 	end
 
 	def create
+
 		item = Item.new(item_params)
-		item.save
-		render json: "#{item.id}"
+		item.data(item_params[:image_id])
+		if item.save
+		  render plain: '保存に成功しました'
+	    else
+	      render plain: item.errors.full_messages[0]
+	    end
 	end
 
 	def destroy
@@ -85,7 +90,7 @@ class Admin::ItemsController < ApplicationController
 
     private
     def item_params
-    	params.require(:item).permit(:name, :image_id, :price, :maker_id, :genre_id)
+    	params.require(:item).permit(:name, :image_id, :price, :maker_id, :genre_id, :date)
     end
 
     def genre_params

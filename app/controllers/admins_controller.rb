@@ -19,7 +19,7 @@ class AdminsController < ApplicationController
     end
 
     def index
-        @admin = Admin.find_by(id:session[:admin_id])
+        @admin = Admin.find(session[:admin_id])
     end
 
     def other

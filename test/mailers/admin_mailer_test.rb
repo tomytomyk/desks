@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class BadValueTest < ActiveSupport::TestCase
+class AdminMailerTest < ActionMailer::TestCase
   # test "the truth" do
   #   assert true
   # end
