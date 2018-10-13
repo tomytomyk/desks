@@ -1,10 +1,10 @@
 <div id="iframe_id">
 <h1>商品一覧</h1>
-<% @items.each do |item| %>
+<% items.each do |item| %>
     <%= item.id %>
 	<%= item.name %>
-	<%= item.image_id %>
 	<%= item.price %>
+	<%= image_tag(show_image_path(item.id)) %>
 	<%= item.maker.name %>
 	<%= item.genre.name %>
 	<%= link_to "編集", edit_admin_item_path(item.id), remote: true %>

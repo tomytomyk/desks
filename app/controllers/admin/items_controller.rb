@@ -13,12 +13,16 @@ class Admin::ItemsController < ApplicationController
 		@occupations = Occupation.all
 	end
 
-	def create
+	def show_image
+		item = Item.find(params[:id])
+		send_data item.photo, :type => item.ctype, :disposition => "inline"
+	end
 
+	def create
 		item = Item.new(item_params)
 		item.data(item_params[:image_id])
 		if item.save
-		  render plain: '保存に成功しました'
+		  render json: "#{item.id}"
 	    else
 	      render plain: item.errors.full_messages[0]
 	    end
