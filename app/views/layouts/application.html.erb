@@ -19,6 +19,9 @@
       ゲスト
     <% end %>
     さん
+    <nav>
+      <%= link_to "商品一覧ページ", items_path %>
+    </nav>
     <% if session[:user_id] != nil %>
     <nav>
       <%= link_to "投稿", new_report_path %>

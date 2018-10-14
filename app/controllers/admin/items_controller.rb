@@ -20,12 +20,18 @@ class Admin::ItemsController < ApplicationController
 
 	def create
 		item = Item.new(item_params)
-		item.data(item_params[:image_id])
-		if item.save
-		  render json: "#{item.id}"
+        if item.ctype != nil
+		   item.data(item_params[:image_id])
+		    if item.save
+		      render json: "#{item.id}"
+	        else
+	          render plain: item.errors.full_messages[0]
+	        end
 	    else
-	      render plain: item.errors.full_messages[0]
+	      item.save
+	        render json: "#{item.id}"
 	    end
+
 	end
 
 	def destroy

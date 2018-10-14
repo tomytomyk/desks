@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_12_081139) do
+ActiveRecord::Schema.define(version: 2018_10_14_092036) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -79,10 +79,13 @@ ActiveRecord::Schema.define(version: 2018_10_12_081139) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "password"
-    t.string "image_id"
+    t.binary "image_id"
     t.integer "occupation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "ctype"
+    t.binary "photo"
+    t.integer "flag", default: 0, null: false
   end
 
 end
