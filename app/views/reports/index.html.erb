@@ -3,17 +3,21 @@
 	<%= link_to report.item.name,  item_path(report.item.id) %>
 	<%= report.title %>
 	星:<%= report.value %>
+    <% if report.user.flag == 1 %>
+    <p>退会したユーザー</p>
+    <% else %>
 	<%= link_to report.user.name, user_path(report.user.id) %>
+    <% end %>
 	<%= report.body %>
     <%= form_for (@report_value), url: value_path(report_id: report, flag: true) do |f| %>
     <%= f.submit("高評価") %>
     <% end %>
-    <% good = ReportValue.where(report_id:report,user_id: session[:user_id], flag: true) %>
+    <% good = ReportValue.where(report_id:report, flag: true) %>
     <%= good.count %>
     <%= form_for (@report_value), url: value_path(report_id: report, flag: false) do |f| %>
     <%= f.submit("低評価") %>
     <% end %>
-    <% bad = ReportValue.where(report_id:report,user_id: session[:user_id], flag: false) %>
+    <% bad = ReportValue.where(report_id:report, flag: false) %>
     <%= bad.count %>
     <%= report.created_at.strftime('%Y年%m月%d日 %H:%M') %>
 <% end %>

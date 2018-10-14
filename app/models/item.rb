@@ -10,10 +10,15 @@ class Item < ApplicationRecord
     	self.ctype = image_id.content_type
     	self.photo = image_id.read
     end
+
     private
       def file_invalid?
+        if self.photo == nil
+          true
+        else
       	ps = ["image/jpeg", "image/gif", "image/png"]
       	errors.add(:image_id,'') if !ps.include?(self.ctype)
         errors.add(:image_id,'') if self.photo.length > 1.megabyte
+        end
       end
 end

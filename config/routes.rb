@@ -30,7 +30,8 @@ Rails.application.routes.draw do
   end
   resources :relationships, only: [:create, :destroy]
 
-  get "/items/:id/show_image" => "admin/items#show_image", as:"show_image"
+  get "admin/items/:id/show_image" => "admin/items#show_image", as:"show_image"
+  get "user/:id/show_image" => "users#show_image", as:"show_user_image"
 
 
 end

@@ -1,1 +1,27 @@
 <%= @user.name %>
+<%= @user.occupation.name %>
+<% if @user.ctype == nil %>
+    <%= image_tag ('no_image.png'), size: 10*10 %>
+<% else %>
+    <%= image_tag(show_user_image_path(@user.id), size: 10*10) %>
+<% end %>
+<% @user.reports.each do |report| %>
+	<%= link_to report.item.name,  item_path(report.item.id) %>
+	<%= report.title %>
+	星:<%= report.value %>
+	<%= report.body %>
+    <%= form_for (@report_value), url: value_path(report_id: report, flag: true) do |f| %>
+    <%= f.submit("高評価") %>
+    <% end %>
+    <% good = ReportValue.where(report_id:report,user_id: session[:user_id], flag: true) %>
+    <%= good.count %>
+    <%= form_for (@report_value), url: value_path(report_id: report, flag: false) do |f| %>
+    <%= f.submit("低評価") %>
+    <% end %>
+    <% bad = ReportValue.where(report_id:report,user_id: session[:user_id], flag: false) %>
+    <%= bad.count %>
+    <%= report.created_at.strftime('%Y年%m月%d日 %H:%M') %>
+<% end %>
+<% if @user.id == session[:user_id] %>
+<%= render "users/edit", user: @user %>
+<% end %>
