@@ -1,21 +1,29 @@
-<h1>トップページ</h1>
-
 <% if flash[:notice] %>
   <%= notice %>
 <% end %>
 
-<p>ログイン</p>
+<div class="login-select-box">
+<div class="no-login-select">ログイン無し</div>
+<div class="login-select">ログイン</div>
+<div class="signup-select">新規登録</div>
+<div class="no-login-box">
+  <div class="no-login-text">
+    <%= link_to "ログインせずに閲覧", reports_path, class:"no-login-link" %>
+  </div>
+</div>
+<div class="login-box">
 <%= form_tag users_login_path do %>
-  <%= text_field_tag :name, "", placeholder:"名前"%>
-  <%= password_field_tag :password, "", placeholder:"パスワード" %>
-  <%= submit_tag %>
+  <%= text_field_tag :name, "", placeholder:"名前" ,class:"login-name"%>
+  <%= password_field_tag :password, "", placeholder:"パスワード",class:"login-password" %>
+  <%= submit_tag "ログイン", class:"login-submit"%>
 <% end %>
-<p>新規登録</p>
+</div>
+<div class="signup-box">
 <%= form_for @user do |f| %>
-  <%= f.text_field :name,  placeholder:"名前" %>
-  <%= f.password_field :password, placeholder:"パスワード" %>
-  職種：<%= f.collection_select(:occupation_id, Occupation.all, :id, :name) %>
-  <%= f.submit %>
+  <%= f.text_field :name, placeholder:"名前", class:"signup-name" %>
+  <%= f.password_field :password, placeholder:"パスワード", class:"signup-password" %>
+  <%= f.collection_select :occupation_id, Occupation.all, :id, :name, {},{class:"signup-occupation"}%>
+  <%= f.submit "新規登録", class:"signup-submit" %>
 <% end %>
-
-<%= link_to "ログインせずに閲覧", reports_path %>
+</div>
+</div>

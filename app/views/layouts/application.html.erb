@@ -19,25 +19,39 @@
       ゲスト
     <% end %>
     さん
-    <nav>
-      <%= link_to "商品一覧ページ", items_path %>
+    <nav class="nav-list">
+      <%= link_to "ITEMS", items_path, class:"nav-list-link" %>
     </nav>
     <% if session[:user_id] != nil %>
-    <nav>
-      <%= link_to "投稿", new_report_path %>
+    <nav class="nav-list">
+      <%= link_to "CONTRIBUTION", new_report_path, class:"nav-list-link" %>
     </nav>
-    <nav>
-      <%= link_to "マイページ", user_path(session[:user_id]) %>
+    <nav class="nav-list">
+      <%= link_to "MY PAGE", user_path(session[:user_id]), class:"nav-list-link" %>
     </nav>
-    <nav>
-      <%= link_to "ログアウト", top_path %>
+    <nav class="nav-list">
+      <%= link_to "LOG OUT", top_path, class:"nav-list-link" %>
     </nav>
     <% else %>
-      <%= link_to "ログインページ", top_path %>
+    <nav  class="nav-list">
+      <%= link_to "LOG IN", top_path, class:"nav-list-link" %>
+    </nav>
     <% end %>
     </header>
-    <div>
-      検索
+    <main>
     <%= yield %>
+    </main>
+    <div class="sidebar">
+      <% if session[:user_id] != nil %>
+        <% if User.find(session[:user_id]).ctype == nil %>
+          <%= image_tag ('no_image.png'), size: 14*14 %>
+        <% else %>
+          <%= image_tag(show_user_image_path(session[:user_id]), size: 14*14) %>
+        <% end %>
+        <%= User.find(session[:user_id]).name %>
+      <% else %>
+        <%= image_tag ('no_image.png'), size: 10*10 %>
+      <% end %>
+    </div>
   </body>
 </html>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_14_092036) do
+ActiveRecord::Schema.define(version: 2018_10_18_094943) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -38,6 +38,12 @@ ActiveRecord::Schema.define(version: 2018_10_14_092036) do
     t.binary "photo"
   end
 
+  create_table "languages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+  end
+
   create_table "makers", force: :cascade do |t|
     t.string "name"
     t.string "maker_url"
@@ -52,7 +58,7 @@ ActiveRecord::Schema.define(version: 2018_10_14_092036) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "follow_id"
+    t.integer "followed_id"
     t.integer "follower_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
