@@ -5,23 +5,47 @@
 <% else %>
     <%= image_tag(show_user_image_path(@user.id), size: 10*10) %>
 <% end %>
+<% if Relationship.exists?(followed_id: @user.id, follower_id: session[:user_id]) %>
+<%= form_for @relationship, url: user_follow_destroy_path(@user), method: :get do |f| %>
+    <%= f.submit "フォロー解除" %>
+<% end %>
+<% else %>
+<%= form_for @relationship, url: user_followed_path(@user), method: :get do |f| %>
+    <%= f.submit "フォローする" %>
+<% end %>
+<% end %>
+フォロワー数
+<%= @user.follower_relationships.count %>
+フォロワー一覧
+<% @user.follower_relationships.each do |relationship| %>
+  <%= relationship.follower.name %>
+<% end %>
+フォロー数
+<%= @user.followed_relationships.count %>
+フォロー一覧
+<% @user.followed_relationships.each do |relationship| %>
+  <%= relationship.followed.name %>
+<% end %>
 <% @user.reports.each do |report| %>
 	<%= link_to report.item.name,  item_path(report.item.id) %>
 	<%= report.title %>
 	星:<%= report.value %>
 	<%= report.body %>
     <%= form_for (@report_value), url: value_path(report_id: report, flag: true) do |f| %>
-    <%= f.submit("高評価") %>
+    <%= f.submit "高評価" %>
     <% end %>
     <% good = ReportValue.where(report_id:report,user_id: session[:user_id], flag: true) %>
     <%= good.count %>
     <%= form_for (@report_value), url: value_path(report_id: report, flag: false) do |f| %>
-    <%= f.submit("低評価") %>
+    <%= f.submit "低評価" %>
     <% end %>
     <% bad = ReportValue.where(report_id:report,user_id: session[:user_id], flag: false) %>
     <%= bad.count %>
     <%= report.created_at.strftime('%Y年%m月%d日 %H:%M') %>
 <% end %>
 <% if @user.id == session[:user_id] %>
+<button class="user-edit-button">編集する</button>
+<div class="user-edit">
 <%= render "users/edit", user: @user %>
+</div>
 <% end %>

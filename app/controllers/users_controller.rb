@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 	def top
         session[:user_id] = nil
         @user = User.new
+        render :layout => 'login'
 	end
 
 	def create
@@ -29,6 +30,8 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
     @report_value = ReportValue.new
+    @relationship = Relationship.new
+    @relationshipa = Relationship.find_by(followed_id: @user.id, follower_id: session[:user_id])
   end
 
   def show_image
@@ -38,7 +41,7 @@ class UsersController < ApplicationController
 
   def update
     user = User.find(params[:id])
-    if item.ctype != nil
+    if user.ctype != nil
       user.data(user_params[:image_id])
         if user.update(user_params)
           redirect_to user_path(user)
@@ -57,14 +60,23 @@ class UsersController < ApplicationController
     redirect_to top_path
   end
 
-  def follow
+  def followed
+    relationship = Relationship.new(followed_id: params[:user_id], follower_id: session[:user_id])
+    relationship.save
+    redirect_to user_path(params[:user_id])
   end
 
-  def follower
+  def follow_destroy
+    relationship = Relationship.find_by(params[:id])
+    relationship.destroy
+    redirect_to user_path(params[:user_id])
   end
 
 	private
     def user_params
       params.require(:user).permit(:name, :password, :occupation_id, :image_id, :flag)
+    end
+    def relationship_params
+      params.require(:relationship).permit(:followed_id,:follower_id)
     end
 end

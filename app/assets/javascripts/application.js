@@ -21,4 +21,39 @@ $(function() {
 		var a = "idは" + e.detail +"です"
 		$('.add-item').html(a);
 	})
-})
+	$('.no-login-select').on('click',function(){
+		$('.no-login-box').css({'z-index': '5'});
+		$('.login-box').css({'z-index': '2'});
+		$('.signup-box').css({'z-index': '1'});
+	});
+    $('.login-select').on('click',function(){
+		$('.no-login-box').css({'z-index': '2'});
+		$('.login-box').css({'z-index': '5'});
+		$('.signup-box').css({'z-index': '1'});
+	});
+	$('.signup-select').on('click',function(){
+		$('.no-login-box').css({'z-index': '2'});
+		$('.login-box').css({'z-index': '1'});
+		$('.signup-box').css({'z-index': '5'});
+	});
+	$('header').animate({'width': '15%'}, 2000);
+	$('.nav-list').mouseover(function(){
+		$(this).css({'background-color': '#e9bc00'});
+		$(this).animate({'width': '150%'}, 80);
+	});
+	$('.nav-list').mouseout(function(){
+		$(this).css({'background-color': ''});
+		$(this).animate({'width': '100%'}, 80);
+	});
+	$('.user-edit-button').on('click',function(){
+		$(this).blur();
+		if($("#modal-overlay")[0]) return false ;
+		$('body').append('<div class="modal-overlay"></div>');
+		$('.modal-overlay').fadeIn("slow");
+		$('.user-edit').fadeIn("slow");
+	});
+	$('.modal-overlay,.close-button').unbind().on('click',function(){
+		$('.modal-overlay,.user-edit').fadeOut("slow");
+		$('.modal-overlay').remove("");
+	});
+});
