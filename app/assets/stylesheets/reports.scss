@@ -1,3 +1,41 @@
 // Place all the styles related to the reports controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.report-show{
+}
+.sub-report-show{
+}
+.sub-report-box{
+	width: 60%;
+	height: 100px;
+	border-top: solid;
+	border-bottom: solid;
+	margin: 10px auto 0;
+	position: relative;
+}
+.sub-report-form{
+	display: none;
+	z-index: 100;
+	position: fixed;
+	width: 40%;
+	height: 30vh;
+	background-color: #ffffff;
+    top: 10vh;
+    left: 30%;
+}
+.sub-report-body-form{
+	width: 60%;
+	height: 60px;
+	margin-left: 20%;
+	margin-top: 10%;
+}
+.sub-report-submit{
+    margin-top: 5%;
+    margin-left: 20%;
+    float: left;
+}
+.close-sub-report-button{
+    margin-top: 5%;
+    margin-left: 20%;
+    float: left;
+}

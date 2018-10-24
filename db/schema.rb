@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_18_094943) do
+ActiveRecord::Schema.define(version: 2018_10_24_124441) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -19,36 +19,10 @@ ActiveRecord::Schema.define(version: 2018_10_18_094943) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "genres", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "items", force: :cascade do |t|
-    t.string "name"
-    t.binary "image_id"
-    t.integer "price"
-    t.integer "maker_id"
-    t.integer "genre_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "count", default: 0
-    t.string "ctype"
-    t.binary "photo"
-  end
-
   create_table "languages", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
-  end
-
-  create_table "makers", force: :cascade do |t|
-    t.string "name"
-    t.string "maker_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "occupations", force: :cascade do |t|
@@ -76,8 +50,16 @@ ActiveRecord::Schema.define(version: 2018_10_18_094943) do
     t.string "title"
     t.string "body"
     t.integer "user_id"
-    t.integer "item_id"
-    t.integer "value"
+    t.integer "language_id"
+    t.integer "value", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "sub_reports", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "report_id"
+    t.string "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

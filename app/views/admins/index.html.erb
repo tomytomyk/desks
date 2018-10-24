@@ -1,9 +1,20 @@
 <h1>ログインおめでとう！</h1>
-<%= link_to "情報登録ページ", new_admin_item_path %>
 <%= link_to "ユーザー一覧", admin_users_path %>
 <%= link_to "ログアウト", admins_top_path %>
-<%= @admin.id %>
-<%= session.to_hash %>
 
-<div class="button">クリック</div>
+<div class="button"></div>
 <div class="place"></div>
+<%= form_for(@language, url: language_path) do |f| %>
+  <%= f.text_field :name, placeholder: "言語名" %>
+  <%= f.submit '言語登録' %>
+<% end %>
+<%= form_for(@occupation, url: occupation_path) do |f| %>
+  <%= f.text_field :name, placeholder: "職種名" %>
+  <%= f.submit '職種登録' %>
+<% end %>
+<div class="language-update">
+<%= render "admins/language", languages: @languages %>
+</div>
+<div class="occupation-update">
+<%= render "admins/occupation", occupations: @occupations %>
+</div>

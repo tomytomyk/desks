@@ -19,9 +19,6 @@
       ゲスト
     <% end %>
     さん
-    <nav class="nav-list">
-      <%= link_to "ITEMS", items_path, class:"nav-list-link" %>
-    </nav>
     <% if session[:user_id] != nil %>
     <nav class="nav-list">
       <%= link_to "CONTRIBUTION", new_report_path, class:"nav-list-link" %>
@@ -32,9 +29,17 @@
     <nav class="nav-list">
       <%= link_to "LOG OUT", top_path, class:"nav-list-link" %>
     </nav>
+    <nav  class="nav-list">
+      <div class="nav-list-link">LANGUAGE</div>
+      <div class="language-list"></div>
+    </nav>
     <% else %>
     <nav  class="nav-list">
       <%= link_to "LOG IN", top_path, class:"nav-list-link" %>
+    </nav>
+    <nav  class="nav-list2">
+      <div class="nav-list-link">LANGUAGE</div>
+      <div class="language-list"></div>
     </nav>
     <% end %>
     </header>
@@ -48,9 +53,55 @@
         <% else %>
           <%= image_tag(show_user_image_path(session[:user_id]), size: 14*14) %>
         <% end %>
+      <div class="session-user-name">
         <%= User.find(session[:user_id]).name %>
+      </div>
+      <div class="session-follower button">
+        <div class="session-follower-text">
+      follower<br>
+      <%= User.find(session[:user_id]).follower_relationships.count %>
+      </div>
+      </div>
+      <div class="session-follower-info">
+      一覧
+      <% User.find(session[:user_id]).follower_relationships.each do |relationship| %>
+      <div class="follower-info-box">
+      <% if relationship.follower.ctype == nil %>
+      <%= image_tag ('no_image.png'), class:"follower-image" %>
       <% else %>
-        <%= image_tag ('no_image.png'), size: 10*10 %>
+      <%= image_tag(show_user_image_path(relationship.follower.id), class:"follower-image") %>
+      <% end %>
+      <div class="follower-name">
+      <%= link_to relationship.follower.name, user_path(relationship.follower) %>
+      </div>
+      </div>
+      <% end %>
+      <button class="close-sub-report-button">閉じる</button>
+      </div>
+      <div class="session-follow button">
+        <div class="session-follow-text">
+      follow<br>
+      <%= User.find(session[:user_id]).followed_relationships.count %>
+      </div>
+      </div>
+      <div class="session-follow-info">
+      一覧
+      <% User.find(session[:user_id]).followed_relationships.each do |relationship| %>
+      <div class="follower-info-box">
+      <% if relationship.follower.ctype == nil %>
+      <%= image_tag ('no_image.png'), class:"follower-image" %>
+      <% else %>
+      <%= image_tag(show_user_image_path(relationship.follower.id), class:"follower-image") %>
+      <% end %>
+      <div class="follower-name">
+      <%= link_to relationship.followed.name, user_path(relationship.followed) %>
+      </div>
+      </div>
+      <% end %>
+      <button class="close-sub-report-button">閉じる</button>
+      </div>
+      <% else %>
+        <%= image_tag ('no_image.png'), size: 14*14 %>
       <% end %>
     </div>
   </body>

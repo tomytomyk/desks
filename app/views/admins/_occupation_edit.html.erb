@@ -1,0 +1,4 @@
+<%= form_for occupation, url:update_occupation_path(occupation), method: :patch, remote: true do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+<% end %>

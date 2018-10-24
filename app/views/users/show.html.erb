@@ -27,7 +27,6 @@
   <%= relationship.followed.name %>
 <% end %>
 <% @user.reports.each do |report| %>
-	<%= link_to report.item.name,  item_path(report.item.id) %>
 	<%= report.title %>
 	星:<%= report.value %>
 	<%= report.body %>
@@ -42,9 +41,17 @@
     <% bad = ReportValue.where(report_id:report,user_id: session[:user_id], flag: false) %>
     <%= bad.count %>
     <%= report.created_at.strftime('%Y年%m月%d日 %H:%M') %>
+    <%= form_for @sub_report, url:sub_report_path(report) do |f| %>
+      <%= f.text_field :body %>
+      <%= f.submit %>
+    <% end %>
+    <%= report.sub_reports.each do |sub_report| %>
+      <%= sub_report.user.name %>
+      <%= sub_report.body %>
+    <% end %>
 <% end %>
 <% if @user.id == session[:user_id] %>
-<button class="user-edit-button">編集する</button>
+<button class="user-edit-button button">編集する</button>
 <div class="user-edit">
 <%= render "users/edit", user: @user %>
 </div>

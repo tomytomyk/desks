@@ -1,0 +1,39 @@
+<h1>ユーザー一覧</h1>
+<%= link_to "戻る", admins_index_path %>
+<table border=1>
+  <tr>
+	<th>イメージ</th>
+	<th>ID</th>
+	<th>名前</th>
+	<th>職種</th>
+  <th>最終ログイン</th>
+	<th>退会</th>
+	<th>管理</th>
+  </tr>
+<% @users.each do |user| %>
+  <tr>
+  	<td>
+    <% if user.ctype == nil %>
+	  <%= image_tag ('no_image.png'), size: 5*5 %>
+	<% else %>
+	  <%= image_tag(show_user_image_path(user.id), size: 5*5) %>
+	<% end %>
+    </td>
+	<td><%= user.id %></td>
+	<td><%= user.name %></td>
+    <td><%= user.occupation.name %></td>
+    <td>
+    <% if user.flag == 1 %>
+      退会済み
+    <% end %>
+    </td>
+    <td>
+    <% if user.flag == 1 %>
+    <%= link_to "復活",user_change_path(user), method: :post %>
+    <% else user.flag == 0 %>
+    <%= link_to "削除",user_change_path(user), method: :post %>
+    <% end %>
+    </td>
+  </tr>
+<% end %>
+</table>

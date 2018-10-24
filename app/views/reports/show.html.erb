@@ -1,0 +1,35 @@
+<div class="report-show">
+<%= render "reports/list", report: @report %>
+</div>
+<div class="sub-report-show">
+<% if SubReport.find_by(report_id: @report.id) != nil %>
+<% @report.sub_reports.each do |sub_report|%>
+	<div class="sub-report-box">
+<div class="report-image-box">
+  <% if sub_report.user.ctype == nil %>
+    <%= image_tag ('no_image.png'), size: 7*7, class:"report-user-image" %>
+  <% else %>
+    <%= image_tag(show_user_image_path(sub_report.user.id), size: 7*7, class:"report-user-image") %>
+  <% end %>
+</div>
+<div class="report-user-name">
+  <% if sub_report.user.flag == 1 %>
+    退会したユーザー
+  <% else %>
+    <%= link_to sub_report.user.name, user_path(sub_report.user) %>
+  <% end %>
+</div><br>
+<div class="report-body">
+  <%= sub_report.body %>
+</div>
+  <div class="report-create-time">
+  <%= sub_report.created_at.strftime('%Y年%m月%d日 %H:%M') %>
+  </div>
+</div>
+<% end %>
+</div>
+<% else %>
+<p>
+RE投稿はありません
+</p>
+<% end %>

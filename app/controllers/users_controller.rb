@@ -32,6 +32,7 @@ class UsersController < ApplicationController
     @report_value = ReportValue.new
     @relationship = Relationship.new
     @relationshipa = Relationship.find_by(followed_id: @user.id, follower_id: session[:user_id])
+    @sub_report = SubReport.new
   end
 
   def show_image

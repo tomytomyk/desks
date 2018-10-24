@@ -1,0 +1,4 @@
+<%= form_for language, url:update_language_path(language), method: :patch, remote: true do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+<% end %>

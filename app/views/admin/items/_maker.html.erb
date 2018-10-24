@@ -1,8 +1,0 @@
-<h1>メーカー一覧</h1>
-<% makers.each do |maker| %>
-    <%= maker.id %>
-	<%= maker.name %>
-	<%= maker.maker_url %>
-	<%= link_to "編集",edit_maker_path(maker) %>
-	<%= link_to "削除",destroy_maker_path(maker), method: :delete %>
-<% end %>
