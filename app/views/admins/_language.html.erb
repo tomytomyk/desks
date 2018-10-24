@@ -1,0 +1,8 @@
+<h1>言語一覧</h1>
+<% languages.each do |language| %>
+    <%= language.id %>
+    <%= language.name %>
+    <%= link_to "編集",edit_language_path(language), remote: true %>
+	<%= link_to "削除",destroy_language_path(language), method: :delete %><br>
+<% end %>
+<div class="language-edit"></div>

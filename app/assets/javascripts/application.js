@@ -45,15 +45,35 @@ $(function() {
 		$(this).css({'background-color': ''});
 		$(this).animate({'width': '100%'}, 80);
 	});
-	$('.user-edit-button').on('click',function(){
-		$(this).blur();
+    $(document).on('click', '.modal-overlay,.close-sub-report-button',function(){
+		$('.modal-overlay,.sub-report-form,.session-follow-info,.user-edit,.session-follower-info').fadeOut("slow");
+		$('.modal-overlay').remove("");
+	});
+	$(document).on('click', '.button',function(){
+	    $(this).blur();
 		if($("#modal-overlay")[0]) return false ;
 		$('body').append('<div class="modal-overlay"></div>');
 		$('.modal-overlay').fadeIn("slow");
-		$('.user-edit').fadeIn("slow");
+	    	if($(this).hasClass('session-follow')){
+	    		$('.session-follow-info').fadeIn("slow");
+	    	} else if($(this).hasClass('sub-report-button')){
+	    	    $('.sub-report-form').fadeIn("slow");
+	    	} else if($(this).hasClass('user-edit-button')){
+	    		$('.user-edit').fadeIn("slow");
+	    	} else if($(this).hasClass('session-follower')){
+	    		$('.session-follower-info').fadeIn("slow");
+	    	}
 	});
-	$('.modal-overlay,.close-button').unbind().on('click',function(){
-		$('.modal-overlay,.user-edit').fadeOut("slow");
-		$('.modal-overlay').remove("");
+	$(document).on('mouseover','.session-follow',function(){
+		$(this).css({'background-color': 'red','cursor': 'pointer'});
+	});
+    $(document).on('mouseout','.session-follow',function(){
+		$(this).css({'background-color': ''});
+	});
+	$(document).on('mouseover','.session-follower',function(){
+		$(this).css({'background-color': 'red','cursor': 'pointer'});
+	});
+    $(document).on('mouseout','.session-follower',function(){
+		$(this).css({'background-color': ''});
 	});
 });

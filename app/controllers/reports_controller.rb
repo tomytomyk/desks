@@ -6,15 +6,22 @@ class ReportsController < ApplicationController
     end
 
     def index
-    	@reports = Report.all
+    	@reports = Report.all.order(created_at: :desc)
         @report_value = ReportValue.new
+        @sub_report = SubReport.new
     end
 
     def create
-    	report = Report.new(report_params)
-    	report.user_id = session[:user_id]
-    	report.save
-    	redirect_to reports_path
+        report = Report.new(report_params)
+        report.user_id = session[:user_id]
+        report.save
+        redirect_to reports_path
+    end
+
+    def show
+        @report = Report.find(params[:id])
+        @report_value = ReportValue.new
+        @sub_report = SubReport.new
     end
 
     def value_create
@@ -35,9 +42,24 @@ class ReportsController < ApplicationController
         end
     end
 
-    private
-    def report_params
-    	params.require(:report).permit(:title, :body, :item_id, :user_id, :value)
+    def new_sub_report
+        @sub_report = SubReport.new
+        @report = Report.find(params[:id])
     end
 
+    def create_sub_report
+        sub_report = SubReport.new(user_id: session[:user_id], report_id: params[:report_id], body: sub_report_params[:body])
+        sub_report.save
+        redirect_to report_path(params[:report_id])
+    end
+
+    def destroy_sub_report
+    end
+    private
+    def report_params
+    	params.require(:report).permit(:title, :body, :user_id, :value, :language_id)
+    end
+    def sub_report_params
+        params.require(:sub_report).permit(:body, :user_id, :report_id)
+    end
 end

@@ -1,7 +1,4 @@
-<h1>新着投稿</h1>
-<% n = 1 %>
-<% @reports.last(5).each do |report| %>
-  <div class="report-box">
+<div class="report-box">
     <div class="report-image-box">
     <% if report.user.ctype == nil %>
     <%= image_tag ('no_image.png'), size: 7*7, class:"report-user-image" %>
@@ -24,7 +21,14 @@
     <div class="report-body">
     <%= report.body %>
     </div>
-    <%= link_to "RE投稿する",new_sub_report_path(report), remote: true %>
+    <button class="sub-report-button button">RE投稿する</button>
+    <div class="sub-report-form">
+    <%= form_for (@sub_report), url:sub_report_path(report, report_id: report.id) do |f| %>
+      <%= f.text_area :body ,class:"sub-report-body-form"%><br>
+      <%= f.submit "RE投稿する",class:"sub-report-submit"%>
+    <% end %>
+    <button class="close-sub-report-button">閉じる</button>
+    </div>
     <%= form_for (@report_value), url: value_path(report_id: report, flag: true) do |f| %>
     <div class="high-submit">
     <%= f.submit("高評価") %>
@@ -45,5 +49,3 @@
     </div>
   </div>
 </div>
-<% end %>
-    <div class="new-sub-create"></div>
