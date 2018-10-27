@@ -1,0 +1,4 @@
+$(".new-sub-create").html("<%= escape_javascript(render 'reports/value_show', report_values: @report_values) %>");
+$('body').append('<div class="modal-overlay"></div>');
+$('.modal-overlay').fadeIn("slow");
+$('.value-show').fadeIn("slow");

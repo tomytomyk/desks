@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_24_124441) do
+ActiveRecord::Schema.define(version: 2018_10_27_133555) do
 
   create_table "admins", force: :cascade do |t|
     t.string "name"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2018_10_24_124441) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.integer "view", default: 0
   end
 
   create_table "occupations", force: :cascade do |t|
@@ -50,10 +51,11 @@ ActiveRecord::Schema.define(version: 2018_10_24_124441) do
     t.string "title"
     t.string "body"
     t.integer "user_id"
-    t.integer "language_id"
+    t.integer "language_id", default: 0
     t.integer "value", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "view", default: 0
   end
 
   create_table "sub_reports", force: :cascade do |t|
@@ -74,6 +76,19 @@ ActiveRecord::Schema.define(version: 2018_10_24_124441) do
     t.string "ctype"
     t.binary "photo"
     t.integer "flag", default: 0, null: false
+  end
+
+  create_table "watches", force: :cascade do |t|
+    t.integer "report_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.string "character"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

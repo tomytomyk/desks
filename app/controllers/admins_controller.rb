@@ -23,6 +23,7 @@ class AdminsController < ApplicationController
         @languages = Language.all
         @occupation = Occupation.new
         @occupations = Occupation.all
+        @word = Word.new
     end
 
     def other
@@ -74,6 +75,22 @@ class AdminsController < ApplicationController
         occupation.destroy
         redirect_to admins_index_path
     end
+
+    def word_create
+        word = Word.new(word_params)
+        word.save
+        redirect_to admins_index_path
+    end
+
+    def word_index
+        @words = Word.all
+    end
+
+    def word_destroy
+        word = Word.find(params[:id])
+        word.destroy
+        redirect_to word_index_path
+    end
     private
     def admin_params
       params.require(:admin).permit(:name, :password)
@@ -83,5 +100,8 @@ class AdminsController < ApplicationController
     end
     def occupation_params
       params.require(:occupation).permit(:name)
+    end
+    def word_params
+      params.require(:word).permit(:character)
     end
 end

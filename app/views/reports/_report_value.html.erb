@@ -1,0 +1,37 @@
+    <%= link_to value_path(report_id: report, flag: true), method: :post, remote: true do %>
+    <div class="high-submit value">
+      <% if ReportValue.exists?(user_id: session[:user_id], report_id: report, flag: true) %>
+        <%= image_tag ("after_good.png"), class:"good-image" %>
+      <% else %>
+        <%= image_tag ("before_good.png"), class:"good-image" %>
+      <% end %>
+  </div>
+    <% end %>
+
+    <% good = ReportValue.where(report_id:report,user_id: session[:user_id], flag: true) %>
+    <div class="high-submit-count">
+    <%= link_to good.count, value_show_path(report, flag: true), remote: true %>
+  </div>
+    <%= link_to value_path(report_id: report, flag: false), method: :post, remote: true do %>
+     <div class="low-submit value">
+      <% if ReportValue.exists?(user_id: session[:user_id], report_id: report, flag: false) %>
+    <%= image_tag ("after_bad.png"), class:"bad-image" %>
+    <% else %>
+    <%= image_tag ("before_bad.png"), class:"bad-image" %>
+    <% end %>
+  </div>
+    <% end %>
+    <% bad = ReportValue.where(report_id:report,user_id: session[:user_id], flag: false) %>
+    <div class="low-submit-count">
+    <%= link_to bad.count, value_show_path(report, flag: false), remote: true %>
+  </div>
+    <% g = good.count %>
+    <% b = bad.count %>
+  <% if g + b >= 1 %>
+  <% a = 100*g/(g+b) %>
+    <div class="value-bar">
+      <div class="good-bar" style="width: <%= a %>%;"></div>
+    </div>
+  <% else %>
+  <div class="value-bar" style="background-color:rgb(75, 75, 75);"></div>
+      <% end %>

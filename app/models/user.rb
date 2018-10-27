@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
     has_many :reports
+    has_many :watchs
     belongs_to :occupation
     has_many :report_values
     has_many :sub_reports

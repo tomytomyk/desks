@@ -6,9 +6,22 @@ class ReportsController < ApplicationController
     end
 
     def index
-    	@reports = Report.all.order(created_at: :desc)
         @report_value = ReportValue.new
         @sub_report = SubReport.new
+        if params[:search] != nil
+        @reports = Report.where('title LIKE ? or body LIKE ?', "%#{params[:search]}%","%#{params[:search]}%")
+        @users = User.where('name LIKE ?', "%#{params[:search]}%")
+        elsif params[:report] != nil
+        @reports = Report.where("language_id = ? ",params[:report][:language_id])
+        t = Time.now
+        language = Language.find_by(id: params[:report][:language_id])
+        if t - language.updated_at >= 30
+           language.view += 1
+           language.save
+        end
+        else
+        @reports = Report.all.order(created_at: :desc)
+        end
     end
 
     def create
@@ -22,24 +35,41 @@ class ReportsController < ApplicationController
         @report = Report.find(params[:id])
         @report_value = ReportValue.new
         @sub_report = SubReport.new
+        if Watch.exists?(report_id: params[:id], user_id: session[:user_id])
+            watch = Watch.find_by(report_id: params[:id], user_id: session[:user_id])
+            watch.touch
+            watch.save
+        else
+            watch = Watch.new(report_id: params[:id], user_id: session[:user_id])
+            watch.save
+        end
+        t = Time.now
+        if t - @report.updated_at >= 30
+           @report.view += 1
+           @report.save
+        end
     end
 
     def value_create
-        if    ReportValue.exists?(user_id: session[:user_id], report_id: params[:report_id])
+        if ReportValue.exists?(user_id: session[:user_id], report_id: params[:report_id])
+            if ReportValue.exists?(user_id: session[:user_id], report_id: params[:report_id], flag: params[:flag])
               report_value = ReportValue.find_by(user_id: session[:user_id], report_id: params[:report_id])
-            if  ReportValue.exists?(flag: params[:flag])
                 report_value.destroy
-                redirect_to reports_path
             else
+              report_value = ReportValue.find_by(user_id: session[:user_id], report_id: params[:report_id])
                 report_value.destroy
                 report_value = ReportValue.new(user_id: session[:user_id], report_id: params[:report_id], flag: params[:flag])
                 report_value.save
-                redirect_to reports_path
             end
         else  report_value = ReportValue.new(user_id: session[:user_id], report_id: params[:report_id], flag: params[:flag])
               report_value.save
-              redirect_to reports_path
         end
+        @report = Report.find(params[:report_id])
+    end
+
+    def value_show
+        report = Report.find(params[:id])
+        @report_values = ReportValue.where(report_id: report.id, flag:params[:flag])
     end
 
     def new_sub_report
@@ -58,6 +88,12 @@ class ReportsController < ApplicationController
     private
     def report_params
     	params.require(:report).permit(:title, :body, :user_id, :value, :language_id)
+    end
+    def report_value_params
+        params.require(:report_value).permit(:report_id, :user_id, :flag)
+    end
+    def watch_params
+        params.require(:watch).permit(:report_id, :user_id)
     end
     def sub_report_params
         params.require(:sub_report).permit(:body, :user_id, :report_id)

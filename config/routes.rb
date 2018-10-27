@@ -3,17 +3,13 @@ Rails.application.routes.draw do
 
   get "admins/top" => "admins#top"
   get "admins/index" => "admins#index"
+  post "admins/words" => "admins#word_create", as:"words"
+  get "admins/words" => "admins#word_index", as:"word_index"
+  delete "admins/word/:id" => "admins#word_destroy", as:"word_destroy"
 
   get "/" => "users#top", as:"top"
   post "admins/login" => "admins#login"
   get "admins/other" => "admins#other"
-
-  # get "admin/items/genre/:id" => "admin/items#genre_edit", as:"edit_genre"
-  # post "admin/items/genre" => "admin/items#genre_create", as:"genre"
-  # delete "admin/items/genre/:id" => "admin/items#genre_destroy", as:"destroy_genre"
-  # get "admin/items/maker/:id" => "admin/items#maker_edit", as:"edit_maker"
-  # post "admin/items/maker" => "admin/items#maker_create", as:"maker"
-  # delete "admin/items/maker/:id" => "admin/items#maker_destroy", as:"destroy_maker"
 
   get "admins/language/:id" => "admins#language_edit", as:"edit_language"
   patch "admins/language/:id" => "admins#language_update", as:"update_language"
@@ -43,6 +39,6 @@ Rails.application.routes.draw do
   get "admin/items/:id/show_image" => "admin/items#show_image", as:"show_image"
   get "user/:id/show_image" => "users#show_image", as:"show_user_image"
   post "admin/users/:id" => "admin/users#change_user", as:"user_change"
-
+  get "reports/:id/report_value" => "reports#value_show", as:"value_show"
 
 end

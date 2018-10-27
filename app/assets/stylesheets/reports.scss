@@ -39,3 +39,13 @@
     margin-left: 20%;
     float: left;
 }
+.value-show{
+	display: none;
+	z-index: 100;
+	position: fixed;
+	width: 40%;
+	height: 30vh;
+	background-color: #ffffff;
+    top: 10vh;
+    left: 30%;
+}

@@ -12,13 +12,10 @@
   <body>
     <header>
     <h1><%= link_to "DESKS", reports_path %></h1>
-    ようこそ
-    <% if session[:user_id] != nil %>
-      <%= User.find(session[:user_id]).name %>
-    <% else %>
-      ゲスト
+    <%= form_tag reports_path, method: :get do %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "検索" %>
     <% end %>
-    さん
     <% if session[:user_id] != nil %>
     <nav class="nav-list">
       <%= link_to "CONTRIBUTION", new_report_path, class:"nav-list-link" %>
@@ -29,19 +26,27 @@
     <nav class="nav-list">
       <%= link_to "LOG OUT", top_path, class:"nav-list-link" %>
     </nav>
-    <nav  class="nav-list">
-      <div class="nav-list-link">LANGUAGE</div>
-      <div class="language-list"></div>
-    </nav>
     <% else %>
     <nav  class="nav-list">
       <%= link_to "LOG IN", top_path, class:"nav-list-link" %>
     </nav>
-    <nav  class="nav-list2">
-      <div class="nav-list-link">LANGUAGE</div>
-      <div class="language-list"></div>
-    </nav>
     <% end %>
+    <nav  class="nav-list">
+      <div class="nav-list-link">LANGUAGE</div>
+      <div class="language-list">
+        <%= form_tag reports_path, method: :get do %>
+        <%= collection_select( :report, :language_id, Language.all, :id, :name, :include_blank => true) %>
+        <%= submit_tag %>
+      <% end %>
+      </div>
+    </nav>
+    <nav  class="nav-list">
+      <div class="nav-list-link">OCCUPATION</div>
+      <%= form_tag users_path, method: :get do %>
+        <%= collection_select( :user, :occupation_id, Occupation.all, :id, :name, :include_blank => true) %>
+        <%= submit_tag %>
+      <% end %>
+    </nav>
     </header>
     <main>
     <%= yield %>
@@ -102,6 +107,26 @@
       </div>
       <% else %>
         <%= image_tag ('no_image.png'), size: 14*14 %>
+      <% end %>
+      <h1>HOT LANGUAGE</h1>
+      <% @languages = Language.all %>
+      <% e = [] %>
+      <% @languages.each do |language| %>
+        <% a = language.view %>
+        <% b = 0 %>
+        <% c = 0 %>
+        <% d = language.reports.count %>
+        <% language.reports.each do |report| %>
+          <% b += report.view %>
+          <% c += report.sub_reports.count %>
+        <% end %>
+        <% language.name %>
+        <% e.push(a + b + c + d,language.name) %>
+      <% end %>
+      <% f = e.in_groups_of(2) %>
+      <% g = f.sort.reverse{|a, b| a[0] <=> b[0]} %>
+      <% g.each do |g1, g2| %>
+        <%= g2 %><br>
       <% end %>
     </div>
   </body>

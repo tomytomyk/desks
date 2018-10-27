@@ -1,13 +1,21 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.title{
+	position: absolute;
+	top: 300px;
+	left: 200px;
+	font-size: 200px;
+	font-weight: 900;
+	color: rgba( 255, 255, 0, 0.);
+}
 .login-select-box{
-    width: 20%;
+    width: 300px;
     height: 40vh;
     position: relative;
-    left: 50%;
-    top: 25vh;
-    border: solid;
+    left: 60%;
+    top: calc(50% - 20vh);
+    position: fixed;
 }
 .no-login-select{
 	width: 33%;
@@ -18,7 +26,9 @@
 	text-align: center;
 	display: table-cell;
 	vertical-align: middle;
-    background-color: #14ffff;
+    background-color: #000000;
+    cursor: pointer;
+    color: #ffffff;
 }
 .login-select{
 	width: 33%;
@@ -27,7 +37,9 @@
 	top: 0;
 	left: 33%;
 	text-align: center;
-	background-color: #00ff00;
+	background-color: #000000;
+    cursor: pointer;
+    color: #ffffff;
 }
 .signup-select{
 	width: 34%;
@@ -36,7 +48,9 @@
 	text-align: center;
 	top: 0;
 	left: 66%;
-	background-color: #ff389b;
+	background-color: #000000;
+    cursor: pointer;
+    color: #ffffff;
 }
 .no-login-box{
 	width: 100%;
@@ -45,79 +59,109 @@
 	top: 10%;
 	left: 0;
 	z-index: 3;
-    background-color: #14ffff;
+    background: linear-gradient(to bottom, #000, #eeeeee);
 }
 .login-box{
 	width: 100%;
 	height: 90%;
 	position: absolute;
+	display: none;
 	top: 10%;
 	left: 0;
 	z-index: 2;
-	background-color: #00ff00;
+	background: linear-gradient(to bottom, #000, #eeeeee);
 }
 .signup-box{
+	display: none;
 	width: 100%;
 	height: 90%;
 	position: absolute;
 	top: 10%;
 	left: 0;
     z-index: 1;
-    background-color: #ff389b;
+    background: linear-gradient(to bottom, #000, #eeeeee);
 }
 .no-login-text{
-    margin-top: 25%;
+    margin-top: calc(50% - 2.5vh);
     margin-left: 10%;
     margin-right: 10%;
 }
 .no-login-link{
-    width: 100%;
+    width: 80%;
     text-align: center;
-    background-color: #ff9b38;
-    border-radius: 20px;
+    background-color: #ffffff;
     display: inline-block;
     line-height: 5vh;
     text-decoration: none;
+    border: solid;
+	border-width: 1px;
+	border-color: rgb(216, 216, 216);
+	position: absolute;
+}
+.login-form-box{
+	height: 60%;
+	width: 80%;
+	margin-top: 20%;
+	margin-left: 10%;
+	position: relative;
 }
 .login-name{
-	width: 70%;
-	height: 20px;
-	margin-top: 10%;
-	margin-left: 15%;
+    height: 5vh;
+    width: 98%;
+    position: absolute;
+    top: 0;
 }
 .login-password{
-	width: 70%;
-	height: 20px;
-	margin-top: 10%;
-	margin-left: 15%;
+	height: 5vh;
+	width: 98%;
+    position: absolute;
+    top: calc(50% - 2.5vh);
 }
 .login-submit{
-	width: 40%;
+	width: 100%;
+	height: 5vh;
+	border: solid;
+	border-width: 1px;
+	border-color: rgb(216, 216, 216);
+	position: absolute;
+	bottom: 0;
+	cursor: pointer;
+	backgrond-color: #ffffff;
+}
+.signup-form-box{
+	height: 80%;
+	width: 80%;
 	margin-top: 10%;
-	margin-left: 30%;
+	margin-left: 10%;
+	position: relative;
 }
 .signup-name{
-	width: 70%;
-	height: 20px;
-	margin-top: 10%;
-	margin-left: 15%;
+    height: 4vh;
+    width: 98%;
+    position: absolute;
+    top: 0;
 }
 .signup-password{
-	width: 70%;
-	height: 20px;
-	margin-top: 10%;
-	margin-left: 15%;
+	height: 4vh;
+	width: 98%;
+    position: absolute;
+    top: calc((100% - 16vh) / 3 + 4vh);
 }
 .signup-occupation{
-	width: 50%;
-	height: 20px;
-	margin-top: 10%;
-	margin-left: 15%;
+	height: 4vh;
+	width: 99%;
+    position: absolute;
+    top: calc((100% - 16vh) * 2 / 3 + 8vh);
 }
 .signup-submit{
-	width: 40%;
-	margin-top: 10%;
-	margin-left: 30%;
+	width: 100%;
+	height: 4vh;
+	border: solid;
+	border-width: 1px;
+	border-color: rgb(216, 216, 216);
+	position: absolute;
+	bottom: 0;
+	cursor: pointer;
 }
 .user-edit{
 	display: none;

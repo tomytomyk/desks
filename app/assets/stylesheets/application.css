@@ -92,6 +92,16 @@ main{
 }
 .report-body{
 }
+.value-bar{
+	height: 15px;
+	width: 20%;
+	border: solid;
+	background-color: rgb(223, 86, 86);
+}
+.good-bar{
+	height: 100%;
+	background-color: rgb(58, 171, 210);
+}
 .high-submit{
 	position: absolute;
 	bottom: 0;
@@ -102,10 +112,19 @@ main{
 	bottom: 0;
 	right: 10%;
 }
+.good-image{
+	width: 20px;
+	height: 20px;
+}
 .low-submit{
 	position: absolute;
 	bottom: 0;
 	right: 2%;
+}
+
+.bad-image{
+	width: 20px;
+	height: 20px;
 }
 .low-submit-count{
 	position: absolute;

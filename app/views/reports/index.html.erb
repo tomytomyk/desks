@@ -1,6 +1,10 @@
 <h1>新着投稿</h1>
-<% n = 1 %>
-<% @reports.last(5).each do |report| %>
+<% if @users != nil %>
+<% @users.each do |user| %>
+<%= user.name %>
+<% end %>
+<% end %>
+<% @reports.last(20).each do |report| %>
   <div class="report-box">
     <div class="report-image-box">
     <% if report.user.ctype == nil %>
@@ -20,7 +24,8 @@
     </div>
     <div class="report-title">
     <%= link_to report.title, report_path(report) %>
-    </div><br>
+    </div>
+    <%= report.language.name %><br>
     <div class="report-body">
     <%= report.body %>
     </div>
