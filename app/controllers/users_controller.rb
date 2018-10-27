@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
 
 	def top
+        @words = Word.all
+        @word = Word.last
         session[:user_id] = nil
         @user = User.new
         render :layout => 'login'
@@ -27,9 +29,12 @@ class UsersController < ApplicationController
         end
 	end
 
+  def index
+      @users = User.where("occupation_id",params[:user][:occupation_id])
+  end
+
 	def show
 		@user = User.find(params[:id])
-    @report_value = ReportValue.new
     @relationship = Relationship.new
     @relationshipa = Relationship.find_by(followed_id: @user.id, follower_id: session[:user_id])
     @sub_report = SubReport.new

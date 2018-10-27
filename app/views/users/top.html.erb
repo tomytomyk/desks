@@ -1,29 +1,54 @@
+<div class="title">DESKS</div>
+<% m = @word.id %>
+<% a = 0 %>
+<% b = 1 %>
+<% 2000.times do %>
+  <% if a <= 9000 %>
+  <div class="word<%= b %>" style="float: left">
+    <%= @words.sample.character %>
+  </div>
+      <% a += @words.sample.character.length %>
+  <% end %>
+
+  <% b += 1 %>
+  <% end %>
+  <%= a %>
 <% if flash[:notice] %>
   <%= notice %>
 <% end %>
 
 <div class="login-select-box">
-<div class="no-login-select">ログイン無し</div>
-<div class="login-select">ログイン</div>
-<div class="signup-select">新規登録</div>
+<div class="no-login-select">NO LOGIN</div>
+<div class="login-select">LOGIN</div>
+<div class="signup-select">SIGN UP</div>
 <div class="no-login-box">
   <div class="no-login-text">
     <%= link_to "ログインせずに閲覧", reports_path, class:"no-login-link" %>
   </div>
 </div>
 <div class="login-box">
+  <div class="login-form-box">
 <%= form_tag users_login_path do %>
   <%= text_field_tag :name, "", placeholder:"名前" ,class:"login-name"%>
   <%= password_field_tag :password, "", placeholder:"パスワード",class:"login-password" %>
   <%= submit_tag "ログイン", class:"login-submit"%>
 <% end %>
 </div>
+</div>
 <div class="signup-box">
+  <div class="signup-form-box">
 <%= form_for @user do |f| %>
+  <div class="signup-name-box">
   <%= f.text_field :name, placeholder:"名前", class:"signup-name" %>
+</div>
+<div class="signup-pass-box">
   <%= f.password_field :password, placeholder:"パスワード", class:"signup-password" %>
+</div>
+<div class="signup-occu-box">
   <%= f.collection_select :occupation_id, Occupation.all, :id, :name, {},{class:"signup-occupation"}%>
+</div>
   <%= f.submit "新規登録", class:"signup-submit" %>
 <% end %>
+</div>
 </div>
 </div>

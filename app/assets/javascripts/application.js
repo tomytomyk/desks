@@ -21,20 +21,21 @@ $(function() {
 		var a = "idは" + e.detail +"です"
 		$('.add-item').html(a);
 	})
-	$('.no-login-select').on('click',function(){
-		$('.no-login-box').css({'z-index': '5'});
-		$('.login-box').css({'z-index': '2'});
-		$('.signup-box').css({'z-index': '1'});
+
+	$(document).on('click','.no-login-select',function(){
+		$('.no-login-box').css({'display': 'block'});
+		$('.login-box').css({'display': 'none'});
+		$('.signup-box').css({'display': 'none'});
 	});
-    $('.login-select').on('click',function(){
-		$('.no-login-box').css({'z-index': '2'});
-		$('.login-box').css({'z-index': '5'});
-		$('.signup-box').css({'z-index': '1'});
+    $(document).on('click','.login-select',function(){
+		$('.no-login-box').css({'display': 'none'});
+		$('.login-box').css({'display': 'block'});
+		$('.signup-box').css({'display': 'none'});
 	});
-	$('.signup-select').on('click',function(){
-		$('.no-login-box').css({'z-index': '2'});
-		$('.login-box').css({'z-index': '1'});
-		$('.signup-box').css({'z-index': '5'});
+	$(document).on('click','.signup-select',function(){
+		$('.no-login-box').css({'display': 'none'});
+		$('.login-box').css({'display': 'none'});
+		$('.signup-box').css({'display': 'block'});
 	});
 	$('header').animate({'width': '15%'}, 2000);
 	$('.nav-list').mouseover(function(){
@@ -46,7 +47,7 @@ $(function() {
 		$(this).animate({'width': '100%'}, 80);
 	});
     $(document).on('click', '.modal-overlay,.close-sub-report-button',function(){
-		$('.modal-overlay,.sub-report-form,.session-follow-info,.user-edit,.session-follower-info').fadeOut("slow");
+		$('.modal-overlay,.sub-report-form,.session-follow-info,.user-edit,.session-follower-info,.value-show').fadeOut("slow");
 		$('.modal-overlay').remove("");
 	});
 	$(document).on('click', '.button',function(){

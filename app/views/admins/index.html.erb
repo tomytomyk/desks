@@ -1,5 +1,6 @@
 <h1>ログインおめでとう！</h1>
 <%= link_to "ユーザー一覧", admin_users_path %>
+<%= link_to "単語一覧", word_index_path %>
 <%= link_to "ログアウト", admins_top_path %>
 
 <div class="button"></div>
@@ -11,6 +12,10 @@
 <%= form_for(@occupation, url: occupation_path) do |f| %>
   <%= f.text_field :name, placeholder: "職種名" %>
   <%= f.submit '職種登録' %>
+<% end %>
+<%= form_for(@word, url: words_path) do |f| %>
+  <%= f.text_field :character, placeholder: "単語", autofocus: true %>
+  <%= f.submit '単語登録' %>
 <% end %>
 <div class="language-update">
 <%= render "admins/language", languages: @languages %>
