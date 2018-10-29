@@ -40,14 +40,26 @@ $(function() {
 	$('header').animate({'width': '15%'}, 2000);
 	$('.nav-list').mouseover(function(){
 		$(this).css({'background-color': '#e9bc00'});
-		$(this).animate({'width': '150%'}, 80);
+		$(this).animate({'width': '100%'}, 80);
 	});
 	$('.nav-list').mouseout(function(){
 		$(this).css({'background-color': ''});
 		$(this).animate({'width': '100%'}, 80);
+		if($(this).hasClass('language')){
+			$('.language-list').fadeOut(50);
+		} else if($(this).hasClass('occupation')){
+			$('.occupation-list').fadeOut(50);
+		}
+	});
+	$(document).on('mouseover', '.nav-list',function(){
+		if($(this).hasClass('language')){
+			$('.language-list').fadeIn(50);
+		} else if($(this).hasClass('occupation')){
+			$('.occupation-list').fadeIn(50);
+		}
 	});
     $(document).on('click', '.modal-overlay,.close-sub-report-button',function(){
-		$('.modal-overlay,.sub-report-form,.session-follow-info,.user-edit,.session-follower-info,.value-show').fadeOut("slow");
+		$('.modal-overlay,.sub-report-form,.session-follow-info,.user-edit,.session-follower-info,.value-show,.user-follow-index,.user-follower-index,.view-history-info').fadeOut("slow");
 		$('.modal-overlay').remove("");
 	});
 	$(document).on('click', '.button',function(){
@@ -63,6 +75,12 @@ $(function() {
 	    		$('.user-edit').fadeIn("slow");
 	    	} else if($(this).hasClass('session-follower')){
 	    		$('.session-follower-info').fadeIn("slow");
+	    	} else if($(this).hasClass('user-follow')){
+	    		$('.user-follow-index').fadeIn("slow");
+	    	} else if($(this).hasClass('user-follower')){
+	    		$('.user-follower-index').fadeIn("slow");
+	    	} else if($(this).hasClass('view-history')){
+	    		$('.view-history-info').fadeIn("slow");
 	    	}
 	});
 	$(document).on('mouseover','.session-follow',function(){

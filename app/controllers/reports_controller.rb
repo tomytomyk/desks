@@ -9,18 +9,18 @@ class ReportsController < ApplicationController
         @report_value = ReportValue.new
         @sub_report = SubReport.new
         if params[:search] != nil
-        @reports = Report.where('title LIKE ? or body LIKE ?', "%#{params[:search]}%","%#{params[:search]}%")
-        @users = User.where('name LIKE ?', "%#{params[:search]}%")
-        elsif params[:report] != nil
-        @reports = Report.where("language_id = ? ",params[:report][:language_id])
-        t = Time.now
-        language = Language.find_by(id: params[:report][:language_id])
-        if t - language.updated_at >= 30
-           language.view += 1
-           language.save
-        end
+            @reports = Report.where('title LIKE ? or body LIKE ?', "%#{params[:search]}%","%#{params[:search]}%")
+            @users = User.where('name LIKE ?', "%#{params[:search]}%")
+        elsif params[:language_id] != nil
+            @reports = Report.where(language_id: params[:language_id])
+            t = Time.now
+            language = Language.find_by(id: params[:language_id])
+            if t - language.updated_at >= 30
+               language.view += 1
+               language.save
+            end
         else
-        @reports = Report.all.order(created_at: :desc)
+            @reports = Report.all.order(created_at: :desc)
         end
     end
 
@@ -43,20 +43,20 @@ class ReportsController < ApplicationController
             watch = Watch.new(report_id: params[:id], user_id: session[:user_id])
             watch.save
         end
-        t = Time.now
-        if t - @report.updated_at >= 30
-           @report.view += 1
-           @report.save
-        end
+            t = Time.now
+            if t - @report.updated_at >= 30
+               @report.view += 1
+               @report.save
+            end
     end
 
     def value_create
         if ReportValue.exists?(user_id: session[:user_id], report_id: params[:report_id])
             if ReportValue.exists?(user_id: session[:user_id], report_id: params[:report_id], flag: params[:flag])
-              report_value = ReportValue.find_by(user_id: session[:user_id], report_id: params[:report_id])
+                report_value = ReportValue.find_by(user_id: session[:user_id], report_id: params[:report_id])
                 report_value.destroy
             else
-              report_value = ReportValue.find_by(user_id: session[:user_id], report_id: params[:report_id])
+                report_value = ReportValue.find_by(user_id: session[:user_id], report_id: params[:report_id])
                 report_value.destroy
                 report_value = ReportValue.new(user_id: session[:user_id], report_id: params[:report_id], flag: params[:flag])
                 report_value.save

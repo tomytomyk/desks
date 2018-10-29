@@ -7,7 +7,7 @@
 	left: 200px;
 	font-size: 200px;
 	font-weight: 900;
-	color: rgba( 255, 255, 0, 0.);
+	color: rgba( 255, 255, 0, 0.5);
 }
 .login-select-box{
     width: 300px;
@@ -163,16 +163,133 @@
 	bottom: 0;
 	cursor: pointer;
 }
+.search-user-box{
+	width: auto;
+	height: 100px;
+	display: inline-block;
+	margin-left: 50px;
+	margin-top: 50px;
+}
+.search-user-name{
+	width: 100%;
+	text-align: center;
+}
+.user-box{
+	width: 100%;
+	height: 20vh;
+	border-top: solid;
+	border-bottom: solid;
+}
+.user-image-box{
+	width: auto;
+	height: 100%;
+    display: inline-block;
+	float: left;
+}
+.user-image{
+}
+.user-info-box{
+	float: left;
+	position: relative;
+	width: 80%;
+	height: 100%;
+}
+.user-name{
+    position: absolute;
+    top: 0;
+    left: 5%;
+	margin-top: 0px;
+}
+.user-occupation{
+    position: absolute;
+    top: 0;
+    left: 20%;
+	margin-top: 0px;
+}
+.user-login-time{
+    position: absolute;
+    top: 0;
+	right: 0;
+}
+.user-edit-button{
+	position: absolute;
+	bottom: 20%;
+	left: 5%;
+	cursor: pointer;
+}
 .user-edit{
 	display: none;
 	z-index: 100;
 	position: fixed;
 	width: 30%;
 	height: 40vh;
-	background-color: green;
+	background-color: #ffffff;
     top: 30vh;
     left: 35%;
 }
 .user-edit-name{
 	padding-top: 5%;
+}
+.user-follow{
+    position: absolute;
+    top: 30%;
+    left: 5%;
+	cursor: pointer;
+}
+.user-follow-index{
+    display: none;
+    height: auto;
+    width: 30%;
+    position: fixed;
+    z-index: 100;
+    top: 40vh;
+    left: 35%;
+    background-color: #ffffff;
+}
+.user-follower{
+    position: absolute;
+    top: 30%;
+    left: 20%;
+    cursor: pointer;
+}
+.follow-submit{
+	width: 100%;
+}
+.user-follower-index{
+    display: none;
+    height: auto;
+    width: 30%;
+    position: fixed;
+    z-index: 100;
+    top: 40vh;
+    left: 35%;
+    background-color: #ffffff;
+}
+.view-history{
+	position: absolute;
+	bottom: 20%;
+	left: 20%;
+	cursor: pointer;
+}
+.view-history-info{
+    display: none;
+    height: auto;
+    width: 30%;
+    position: fixed;
+    z-index: 100;
+    top: 40vh;
+    left: 35%;
+    background-color: #ffffff;
+}
+.users-report{
+	height: auto;
+	width: 100%;
+}
+.user-index{
+	width: 60%;
+	height: auto;
+	margin-left: 20%;
+	margin-top: 5px;
+	border-top: solid;
+	border-bottom: solid;
 }

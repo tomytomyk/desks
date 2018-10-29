@@ -1,26 +1,31 @@
-<%= form_for user do |f| %>
 <table cellspacing= "20">
-  <tr class="user-edit-name">
-  <td><%= f.label :名前 %></td>
-  <td><%= f.text_field :name %></td>
-  </tr>
-  <tr class="user-edit-password">
-    <td><%= f.label :パスワード %></td>
-    <td><%= f.password_field :password %></td>
-  </tr>
-  <tr class="user-edit-occupation">
-    <td><%= f.label :職種 %></td>
-    <td><%= f.collection_select(:occupation_id, Occupation.all, :id, :name) %></td>
-  </tr>
-  <tr class="user-edit-image">
-    <td><%= f.label :ユーザー画像 %></td>
-    <td><%= f.file_field :image_id %></td>
-  </tr>
-  <tr class="user-edit-submit">
-  	<td></td>
-    <td><%= f.submit "更新する" %></td>
+  <%= form_for user do |f| %>
+    <tr class="user-edit-name">
+      <td><%= f.label :名前 %></td>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr class="user-edit-password">
+      <td><%= f.label :パスワード %></td>
+      <td><%= f.password_field :password %></td>
+    </tr>
+    <tr class="user-edit-occupation">
+      <td><%= f.label :職種 %></td>
+      <td><%= f.collection_select(:occupation_id, Occupation.all, :id, :name) %></td>
+    </tr>
+    <tr class="user-edit-image">
+      <td><%= f.label :ユーザー画像 %></td>
+      <td><%= f.file_field :image_id %></td>
+    </tr>
+    <tr class="user-edit-submit">
+    	<td></td>
+      <td><%= f.submit "更新する" %></td>
+    </tr>
+  <% end %>
+  <tr>
+    <td></td>
+    <td>
+      <%= link_to "退会する" ,user_path(user.id), method: :delete, "data-confirm" => "本当に退会しますか？" %>
+    </td>
   </tr>
 </table>
-<% end %>
-<%= link_to "退会する" ,user_path(user.id), method: :delete, "data-confirm" => "本当に退会しますか？" %>
-<button class="close-button">閉じる</button>
+<button class="close-sub-report-button">閉じる</button>

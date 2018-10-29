@@ -1,3 +1,30 @@
 <% @users.each do |user| %>
-  <%= user.name %>
+  <div class="user-index">
+    <%= link_to user_path(sub_report.user.id) do %>
+      <% if user.ctype == nil %>
+        <%= image_tag ('no_image.png'), size: 5*5, class:"user-image" %>
+      <% else %>
+        <%= image_tag(show_user_image_path(user.id), size: 5*5, class:"user-image") %>
+      <% end %>
+    <% end %>
+    <%= link_to user.name, user_path(user.id) %>
+    <%= user.occupation.name %>
+      フォロー
+    <%= user.followed_relationships.count %>
+      フォロワー
+    <%= user.follower_relationships.count %>
+        最終ログイン
+    <% if user.login_time != nil %>
+      <% t = Time.now - user.login_time %>
+      <% if 0 <= t && t < 60 %>
+        <%= t %>秒前
+      <% elsif 60 <= t && t < 3600 %>
+        <%= (t / 60).floor %>分前
+      <% elsif 3600 <= t && t< 86400 %>
+        <%= (t / 3600).floor %>時間前
+      <% elsif %>
+        <%= (t / 86400).floor %>日前
+      <% end %>
+    <% end %>
+  </div>
 <% end %>

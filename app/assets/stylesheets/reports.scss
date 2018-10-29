@@ -43,9 +43,44 @@
 	display: none;
 	z-index: 100;
 	position: fixed;
-	width: 40%;
-	height: 30vh;
+	min-width: 200px;
+	width: auto;
+	min-height: 200px;
+	height: auto;
 	background-color: #ffffff;
     top: 10vh;
     left: 30%;
+}
+.value-single{
+	cellspacing: 1;
+	border-top: solid;
+	border-bottom: solid;
+}
+.new-report-box{
+	height: 50vh;
+	width: 60%;
+	background-color: yellow;
+	position: absolute;
+	top: 20vh;
+	left: 20%;
+}
+#report_language_id{
+	margin-top: 50px;
+	margin-left: 10%
+}
+.new-report-title{
+	margin-top: 50px;
+	margin-left: 10%;
+}
+.new-report-body{
+	margin-top: 50px;
+	margin-left: 10%;
+	width: 60%;
+	height: 10vh;
+}
+.new-report-submit{
+	margin-top: 50px;
+	margin-left: 10%;
+	height: 50px;
+	width: 50%;
 }

@@ -8,19 +8,22 @@ class UsersController < ApplicationController
         render :layout => 'login'
 	end
 
-	def create
-		user = User.new(user_params)
-		if user.save
-		  session[:user_id] = user.id
-		  redirect_to reports_path
+  def create
+    user = User.new(user_params)
+      user.login_time = Time.now
+    if user.save
+      session[:user_id] = user.id
+      redirect_to reports_path
     else
       redirect_to top_path
     end
-	end
+  end
 
-	def login
+  def login
         if User.exists?(name: params[:name], password: params[:password], flag: 0)
            user = User.find_by(name: params[:name], password: params[:password])
+           user.login_time = Time.now
+           user.save
            session[:user_id] = user.id
            redirect_to reports_path
         else
@@ -30,7 +33,7 @@ class UsersController < ApplicationController
 	end
 
   def index
-      @users = User.where("occupation_id",params[:user][:occupation_id])
+      @users = User.where(occupation_id: params[:id])
   end
 
 	def show
@@ -38,6 +41,7 @@ class UsersController < ApplicationController
     @relationship = Relationship.new
     @relationshipa = Relationship.find_by(followed_id: @user.id, follower_id: session[:user_id])
     @sub_report = SubReport.new
+    @sub_reports = SubReport.where(user_id: @user.id)
   end
 
   def show_image
@@ -55,6 +59,7 @@ class UsersController < ApplicationController
           render plain: user.errors.full_messages[0]
         end
     else
+      user.data(user_params[:image_id])
       user.update(user_params)
       redirect_to user_path(user)
     end
@@ -80,7 +85,7 @@ class UsersController < ApplicationController
 
 	private
     def user_params
-      params.require(:user).permit(:name, :password, :occupation_id, :image_id, :flag)
+      params.require(:user).permit(:name, :password, :occupation_id, :image_id, :flag, :login_time)
     end
     def relationship_params
       params.require(:relationship).permit(:followed_id,:follower_id)

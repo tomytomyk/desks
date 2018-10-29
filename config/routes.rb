@@ -25,8 +25,10 @@ Rails.application.routes.draw do
   end
   post "report/report_id/report_value" => "reports#value_create", as:"value"
   post "users/login" => "users#login"
+  get "users/occupation/:id" => "users#index", as:"users_index"
   resources :items
   resources :reports
+  get "reports/language/:id" => "reports#index", as:"languages"
   get "reports/:id/sub_report" => "reports#new_sub_report", as:"new_sub_report"
   post "reports/:id/sub_report" => "reports#create_sub_report", as:"sub_report"
   delete "reports/:report_id/sub_reports/:sub_report_id" => "reports#destroy_sub_report", as:"destroy_sub_report"
