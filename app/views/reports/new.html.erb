@@ -1,6 +1,8 @@
+<div class="new-report-box">
 <%= form_for @report do |f| %>
-  <%= f.collection_select(:language_id, Language.all, :id, :name) %>
-  <%= f.text_field :title, placeholder: "タイトル" %>
-  <%= f.text_field :body, placeholder: "感想など" %>
-  <%= f.submit %>
+  <%= f.collection_select(:language_id, Language.all, :id, :name, include_blank: "言語", class:"new-report-language") %><br>
+  <%= f.text_field :title, placeholder: "タイトル", class:"new-report-title" %><br>
+  <%= f.text_field :body, placeholder: "質問、疑問、つぶやきなど", class:"new-report-body" %><br>
+  <%= f.submit "投稿する", class:"new-report-submit" %>
 <% end %>
+</div>

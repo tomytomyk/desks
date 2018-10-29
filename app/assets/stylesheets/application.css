@@ -23,6 +23,15 @@ header{
 	width: 15%;
 	height: 100vh;
 }
+.title-text-box{
+	text-align: center;
+}
+.title-text{
+	text-decoration: none;
+}
+.search-form-box{
+	text-align: center;
+}
 main{
 	position: absolute;
 	left: 15%;
@@ -38,6 +47,53 @@ main{
     line-height: 10vh;
     text-decoration: none;
     font-size: 150%;
+    cursor: pointer;
+}
+.language-list{
+	display: none;
+	z-index: 100;
+	position: absolute;
+	line-height: 7vh;
+	width: 30vh;
+	height: auto;
+	background-color: #ffffff;
+    bottom: 0;
+    left: 15%;
+    text-align: center;
+}
+.select-language{
+	border-top: solid;
+	border-width: 1px;
+	width: 100%;
+	font-size: 20px;
+    text-decoration: none;
+	display: inline-block;
+}
+.select-language:hover{
+	background-color: yellow;
+}
+.occupation-list{
+	line-height: 7vh;
+	display: none;
+	z-index: 100;
+	position: absolute;
+	width: 40vh;
+	height: auto;
+	background-color: #ffffff;
+    bottom: 0;
+    left: 15%;
+    text-align: center;
+}
+.select-occupation{
+	border-top: solid;
+	border-width: 1px;
+	width: 100%;
+	font-size: 20px;
+    text-decoration: none;
+	display: inline-block;
+}
+.select-occupation:hover{
+	background-color: yellow;
 }
 .sidebar{
 	position: fixed;
@@ -55,6 +111,9 @@ main{
 	width:100%;
 	height:120%;
 	background-color:rgba(0,0,0,0.75);
+}
+.session-user-image{
+	padding-left: calc(50% - 98px);
 }
 .report-box{
 	width: 90%;
@@ -90,36 +149,44 @@ main{
 	float: left;
 	padding-left: 10%;
 }
+.report-language{
+	float: left;
+	padding-left: 10%;
+}
 .report-body{
+}
+.value-box{
+	height: 50%;
+	width: 20%;
+	position: absolute;
+	bottom: 0;
+	right: 0;
 }
 .value-bar{
 	height: 15px;
-	width: 20%;
+	width: 100%;
 	border: solid;
+	border-width: 1px;
 	background-color: rgb(223, 86, 86);
+	float: left;
 }
 .good-bar{
 	height: 100%;
 	background-color: rgb(58, 171, 210);
 }
 .high-submit{
-	position: absolute;
-	bottom: 0;
-	right: 12%;
+	float: left;
 }
 .high-submit-count{
-	position: absolute;
-	bottom: 0;
-	right: 10%;
+	float: left;
 }
 .good-image{
 	width: 20px;
 	height: 20px;
 }
 .low-submit{
-	position: absolute;
-	bottom: 0;
-	right: 2%;
+	float: left;
+	margin-left: 60%;
 }
 
 .bad-image{
@@ -127,9 +194,7 @@ main{
 	height: 20px;
 }
 .low-submit-count{
-	position: absolute;
-	bottom: 0;
-	right: 0;
+	float: left;
 }
 .session-user-name{
 	width: 100%;

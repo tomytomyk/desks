@@ -1,54 +1,20 @@
-<h1>新着投稿</h1>
 <% if @users != nil %>
-<% @users.each do |user| %>
-<%= user.name %>
-<% end %>
+  <% @users.last(5).each do |user| %>
+    <div class="search-user-box">
+      <%= link_to user_path(user.id) do %>
+        <% if user.ctype == nil %>
+          <%= image_tag ('no_image.png'), size: 9*9, class:"user-image" %>
+        <% else %>
+          <%= image_tag(show_user_image_path(user.id), size: 9*9, class:"user-image") %>
+        <% end %>
+      <% end %>
+      <div class="search-user-name">
+        <%= link_to user.name, user_path(user.id) %>
+      </div>
+    </div>
+  <% end %>
 <% end %>
 <% @reports.last(20).each do |report| %>
-  <div class="report-box">
-    <div class="report-image-box">
-    <% if report.user.ctype == nil %>
-    <%= image_tag ('no_image.png'), size: 7*7, class:"report-user-image" %>
-    <% else %>
-    <%= image_tag(show_user_image_path(report.user.id), size: 7*7, class:"report-user-image") %>
-    <% end %>
-    </div>
-    <div class="report-info-box">
-    <% if report.user.flag == 1 %>
-    <p class="report-user-name">退会したユーザー</p>
-    <% else %>
-    <%= link_to report.user.name, user_path(report.user.id),class:"report-user-name" %>
-    <% end %>
-    <div class="report-create-time">
-    <%= report.created_at.strftime('%Y年%m月%d日 %H:%M') %>
-    </div>
-    <div class="report-title">
-    <%= link_to report.title, report_path(report) %>
-    </div>
-    <%= report.language.name %><br>
-    <div class="report-body">
-    <%= report.body %>
-    </div>
-    <%= link_to "RE投稿する",new_sub_report_path(report), remote: true %>
-    <%= form_for (@report_value), url: value_path(report_id: report, flag: true) do |f| %>
-    <div class="high-submit">
-    <%= f.submit("高評価") %>
-    </div>
-    <% end %>
-    <% good = ReportValue.where(report_id:report, flag: true) %>
-    <div class="high-submit-count">
-    <%= good.count %>
-    </div>
-    <%= form_for (@report_value), url: value_path(report_id: report, flag: false) do |f| %>
-    <div class="low-submit">
-    <%= f.submit("低評価") %>
-    </div>
-    <% end %>
-    <% bad = ReportValue.where(report_id:report, flag: false) %>
-    <div class="low-submit-count">
-    <%= bad.count %>
-    </div>
-  </div>
-</div>
+  <%= render"reports/list", report: report %>
 <% end %>
-    <div class="new-sub-create"></div>
+<div class="new-sub-create"></div>

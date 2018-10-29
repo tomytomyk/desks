@@ -1,51 +1,43 @@
 <div class="report-box">
-    <div class="report-image-box">
-    <% if report.user.ctype == nil %>
-    <%= image_tag ('no_image.png'), size: 7*7, class:"report-user-image" %>
-    <% else %>
-    <%= image_tag(show_user_image_path(report.user.id), size: 7*7, class:"report-user-image") %>
+  <div class="report-image-box">
+    <%= link_to user_path(report.user) do %>
+      <% if report.user.ctype == nil %>
+        <%= image_tag ('no_image.png'), size: 7*7, class:"report-user-image" %>
+      <% else %>
+        <%= image_tag(show_user_image_path(report.user.id), size: 7*7, class:"report-user-image") %>
+      <% end %>
     <% end %>
-    </div>
-    <div class="report-info-box">
+  </div>
+  <div class="report-info-box">
     <% if report.user.flag == 1 %>
-    <p class="report-user-name">退会したユーザー</p>
+      <p class="report-user-name">退会したユーザー</p>
     <% else %>
-    <%= link_to report.user.name, user_path(report.user.id),class:"report-user-name" %>
+      <%= link_to report.user.name, user_path(report.user.id),class:"report-user-name" %>
     <% end %>
     <div class="report-create-time">
-    <%= report.created_at.strftime('%Y年%m月%d日 %H:%M') %>
+      <%= report.created_at.strftime('%Y年%m月%d日 %H:%M') %>
     </div>
     <div class="report-title">
-    <%= link_to report.title, report_path(report) %>
+      <%= link_to report.title, report_path(report) %>
+    </div>
+    <div class="report-language">
+      <%= report.language.name %>
     </div><br>
     <div class="report-body">
-    <%= report.body %>
+      <%= report.body %>
     </div>
-    <button class="sub-report-button button">RE投稿する</button>
-    <div class="sub-report-form">
-    <%= form_for (@sub_report), url:sub_report_path(report, report_id: report.id) do |f| %>
-      <%= f.text_area :body ,class:"sub-report-body-form"%><br>
-      <%= f.submit "RE投稿する",class:"sub-report-submit"%>
+    <% if session[:user_id] != nil %>
+      <button class="sub-report-button button">RE投稿する</button>
+      <div class="sub-report-form">
+        <%= form_for (@sub_report), url:sub_report_path(report, report_id: report.id) do |f| %>
+          <%= f.text_area :body ,class:"sub-report-body-form"%><br>
+          <%= f.submit "RE投稿する",class:"sub-report-submit"%>
+        <% end %>
+        <button class="close-sub-report-button">閉じる</button>
+      </div>
     <% end %>
-    <button class="close-sub-report-button">閉じる</button>
-    </div>
-    <%= form_for (@report_value), url: value_path(report_id: report, flag: true) do |f| %>
-    <div class="high-submit">
-    <%= f.submit("高評価") %>
-    </div>
-    <% end %>
-    <% good = ReportValue.where(report_id:report, flag: true) %>
-    <div class="high-submit-count">
-    <%= good.count %>
-    </div>
-    <%= form_for (@report_value), url: value_path(report_id: report, flag: false) do |f| %>
-    <div class="low-submit">
-    <%= f.submit("低評価") %>
-    </div>
-    <% end %>
-    <% bad = ReportValue.where(report_id:report, flag: false) %>
-    <div class="low-submit-count">
-    <%= bad.count %>
+    <div class="value-action<%= report.id %>">
+      <%= render "reports/report_value", report: report %>
     </div>
   </div>
 </div>

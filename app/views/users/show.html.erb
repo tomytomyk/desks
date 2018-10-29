@@ -1,59 +1,129 @@
-<%= @user.name %>
-<%= @user.occupation.name %>
-<% if @user.ctype == nil %>
-    <%= image_tag ('no_image.png'), size: 10*10 %>
-<% else %>
-    <%= image_tag(show_user_image_path(@user.id), size: 10*10) %>
-<% end %>
-<% if Relationship.exists?(followed_id: @user.id, follower_id: session[:user_id]) %>
-<%= form_for @relationship, url: user_follow_destroy_path(@user), method: :get do |f| %>
-    <%= f.submit "フォロー解除" %>
-<% end %>
-<% else %>
-<%= form_for @relationship, url: user_followed_path(@user), method: :get do |f| %>
-    <%= f.submit "フォローする" %>
-<% end %>
-<% end %>
-フォロワー数
-<%= @user.follower_relationships.count %>
-フォロワー一覧
-<% @user.follower_relationships.each do |relationship| %>
-  <%= relationship.follower.name %>
-<% end %>
-フォロー数
-<%= @user.followed_relationships.count %>
-フォロー一覧
-<% @user.followed_relationships.each do |relationship| %>
-  <%= relationship.followed.name %>
-<% end %>
-<% @user.reports.each do |report| %>
-<div class="report-box">
-  <div class="report-title">
-	<%= link_to report.title, report_path(report) %>
-</div>
-    <div class="report-create-time">
-    <%= report.created_at.strftime('%Y年%m月%d日 %H:%M') %>
+<div class="user-box">
+  <div class="user-image-box">
+    <% if @user.ctype == nil %>
+      <%= image_tag ('no_image.png'), size: 11*11, class:"user-image" %>
+    <% else %>
+      <%= image_tag(show_user_image_path(@user.id), size: 11*11, class:"user-image") %>
+    <% end %>
+    <% if @user.id != session[:user_id] %>
+      <div class="follow">
+        <% if Relationship.exists?(followed_id: @user.id, follower_id: session[:user_id]) %>
+          <%= form_for @relationship, url: user_follow_destroy_path(@user), method: :get do |f| %>
+            <%= f.submit "フォロー解除", class:"follow-submit" %>
+          <% end %>
+        <% else %>
+          <%= form_for @relationship, url: user_followed_path(@user), method: :get do |f| %>
+            <%= f.submit "フォローする", class:"follow-submit" %>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
   </div>
-  <div class="report-body">
-  <br><%= report.body %>
-</div>
-    <%= link_to "RE投稿する",new_sub_report_path(report), remote: true %>
-<div class="value-action<%= report.id %>">
-<%= render "reports/report_value", report: report %>
-</div>
+  <div class="user-info-box">
+    <div class="user-name">
+      <%= @user.name %>
+    </div>
+    <div class="user-occupation">
+      <%= @user.occupation.name %>
+    </div>
+    <div class="user-login-time">
+      最終ログイン
+      <% if @user.login_time != nil %>
+      <% t = Time.now - @user.login_time %>
+      <% if 0 <= t && t < 60 %>
+        <%= t %>秒前
+      <% elsif 60 <= t && t < 3600 %>
+        <%= (t / 60).floor %>分前
+      <% elsif 3600 <= t && t< 86400 %>
+        <%= (t / 3600).floor %>時間前
+      <% elsif %>
+        <%= (t / 86400).floor %>日前
+      <% end %>
+      <% end %>
+    </div>
+    <button class="user-follow button">
+      フォロー
+      <%= @user.followed_relationships.count %>
+    </button>
+    <div class="user-follow-index">
+    <table>
+      <% @user.followed_relationships.each do |relationship| %>
+        <tr>
+          <td>
+            <% if relationship.followed.ctype == nil %>
+              <%= image_tag ('no_image.png'), size: 7*7, class:"user-image" %>
+            <% else %>
+              <%= image_tag(show_user_image_path(relationship.followed.id), size: 7*7, class:"user-image") %>
+            <% end %>
+          </td>
+          <td>
+            <%= relationship.followed.name %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+      <button class="close-sub-report-button">閉じる</button>
+    </div>
+    <button class="user-follower button">
+      フォロワー
+      <%= @user.follower_relationships.count %>
+    </button>
+    <div class="user-follower-index">
+      <table>
+        <% @user.follower_relationships.each do |relationship| %>
+          <tr>
+            <td>
+              <% if relationship.follower.ctype == nil %>
+                <%= image_tag ('no_image.png'), size: 7*7, class:"user-image" %>
+              <% else %>
+                <%= image_tag(show_user_image_path(relationship.follower.id), size: 7*7, class:"user-image") %>
+              <% end %>
+            </td>
+            <td>
+              <%= relationship.follower.name %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      <button class="close-sub-report-button">閉じる</button>
+    </div>
+    <% if @user.id == session[:user_id] %>
+      <button class="user-edit-button button">編集する</button>
+      <div class="user-edit">
+        <%= render "users/edit", user: @user %>
+      </div>
+      <button class="view-history button">
+        閲覧履歴
+      </button>
+      <div class="view-history-info">
+        <table>
+          <% @user.watchs.each do |watch| %>
+            <tr>
+              <td>
+                <% if watch.report.user.ctype == nil %>
+                  <%= image_tag ('no_image.png'), size: 7*7, class:"user-image" %>
+                <% else %>
+                  <%= image_tag(show_user_image_path(watch.report.user.id), size: 7*7, class:"user-image") %>
+                <% end %>
+              </td>
+              <td>
+                <%= watch.report.user.name %>
+              </td>
+              <td>
+                <%= watch.report.title %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+        <button class="close-sub-report-button">閉じる</button>
+      </div>
+    <% end %>
   </div>
-<% end %>
-<% if @user.id == session[:user_id] %>
-<button class="user-edit-button button">編集する</button>
-<div class="user-edit">
-<%= render "users/edit", user: @user %>
 </div>
-閲覧履歴
-<% @user.watchs.each do |watch| %>
-  <%= watch.report.user.name %>
-  <%= watch.report.title %>
-  <%= watch.report.body %>
-<% end %>
-<% end %>
-    <div class="new-sub-create"></div>
-    <div class="value"></div>
+<div class="new-sub-create"></div>
+<div class="value"></div>
+<div class="users-report">
+  <% @user.reports.each do |report| %>
+    <%= render "reports/list", report: report %>
+  <% end %>
+</div>

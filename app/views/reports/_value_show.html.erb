@@ -1,6 +1,21 @@
 <div class="value-show">
-<% report_values.each do |report_value| %>
-  <%= report_value.user.name %>
-<% end %>
-  <button class="close-sub-report-button">閉じる</button>
+  <table cellspacing="20">
+    <% report_values.each do |report_value| %>
+      <tr class="value-single">
+		<td>
+		  <%= link_to user_path(report_value.user.id) do %>
+		    <% if report_value.user.ctype == nil %>
+		      <%= image_tag ('no_image.png'), size: 7*7, class:"report-user-image" %>
+		    <% else %>
+		      <%= image_tag(show_user_image_path(report_value.user.id), size: 7*7, class:"report-user-image") %>
+		    <% end %>
+		  <% end %>
+		</td>
+		<td>
+		  <%= report_value.user.name %>
+		</td>
+      </tr>
+	<% end %>
+  </table>
+<button class="close-sub-report-button">閉じる</button>
 </div>
