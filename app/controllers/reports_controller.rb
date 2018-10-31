@@ -9,10 +9,10 @@ class ReportsController < ApplicationController
         @report_value = ReportValue.new
         @sub_report = SubReport.new
         if params[:search] != nil
-            @reports = Report.where('title LIKE ? or body LIKE ?', "%#{params[:search]}%","%#{params[:search]}%")
+            @reports = Report.where('title LIKE ? or body LIKE ?', "%#{params[:search]}%","%#{params[:search]}%").order(created_at: :desc)
             @users = User.where('name LIKE ?', "%#{params[:search]}%")
         elsif params[:language_id] != nil
-            @reports = Report.where(language_id: params[:language_id])
+            @reports = Report.where(language_id: params[:language_id]).order(created_at: :desc)
             t = Time.now
             language = Language.find_by(id: params[:language_id])
             if t - language.updated_at >= 30

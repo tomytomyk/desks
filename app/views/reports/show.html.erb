@@ -3,7 +3,7 @@
 </div>
 <% if SubReport.find_by(report_id: @report.id) != nil %>
   <div class="sub-report-show">
-    <% @report.sub_reports.each do |sub_report|%>
+    <% @report.sub_reports.order(created_at: :desc).each do |sub_report|%>
     	<div class="sub-report-box">
         <div class="report-image-box">
           <%= link_to user_path(sub_report.user.id) do %>

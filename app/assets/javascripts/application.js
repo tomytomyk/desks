@@ -17,10 +17,6 @@
 //= require jquery
 //= require jquery_ujs
 $(function() {
-	$(document).on("ajax:success", ".new_item", function(e) {
-		var a = "idは" + e.detail +"です"
-		$('.add-item').html(a);
-	})
 
 	$(document).on('click','.no-login-select',function(){
 		$('.no-login-box').css({'display': 'block'});
@@ -39,27 +35,37 @@ $(function() {
 	});
 	$('header').animate({'width': '15%'}, 2000);
 	$('.nav-list').mouseover(function(){
-		$(this).css({'background-color': '#e9bc00'});
+		$(this).css({'background-color': 'yellow'});
 		$(this).animate({'width': '100%'}, 80);
 	});
 	$('.nav-list').mouseout(function(){
 		$(this).css({'background-color': ''});
 		$(this).animate({'width': '100%'}, 80);
-		if($(this).hasClass('language')){
-			$('.language-list').fadeOut(50);
-		} else if($(this).hasClass('occupation')){
-			$('.occupation-list').fadeOut(50);
-		}
 	});
-	$(document).on('mouseover', '.nav-list',function(){
+	$('.nav-list').hover(function(){
 		if($(this).hasClass('language')){
-			$('.language-list').fadeIn(50);
+			$('.language-list').css('display', 'block');
 		} else if($(this).hasClass('occupation')){
-			$('.occupation-list').fadeIn(50);
+			$('.occupation-list').css('display', 'block');
 		}
+		$('.list').hover(function(){
+			if($(this).hasClass('language-list')){
+				$('.language-list').css('display', 'block');
+				$('.occupation-list').css('display', 'none');
+			} else if($(this).hasClass('occupation-list')){
+				$('.occupation-list').css('display', 'block');
+				$('.language-list').css('display', 'none');
+			}
+		})
+	},function(){
+	    $('.list').hover(function(){
+		}, function(){
+		    $('.list').css('display', 'none');
+		})
+	    $('.list').css('display', 'none');
 	});
     $(document).on('click', '.modal-overlay,.close-sub-report-button',function(){
-		$('.modal-overlay,.sub-report-form,.session-follow-info,.user-edit,.session-follower-info,.value-show,.user-follow-index,.user-follower-index,.view-history-info').fadeOut("slow");
+		$('.modal-overlay,.sub-report-form,.session-follow-info,.user-edit,.session-follower-info,.value-show,.user-follow-index,.user-follower-index,.view-history-info,.image-render').fadeOut("slow");
 		$('.modal-overlay').remove("");
 	});
 	$(document).on('click', '.button',function(){
@@ -81,6 +87,8 @@ $(function() {
 	    		$('.user-follower-index').fadeIn("slow");
 	    	} else if($(this).hasClass('view-history')){
 	    		$('.view-history-info').fadeIn("slow");
+	    	} else if($(this).hasClass('image-edit')){
+	    		$('.image-render').fadeIn("slow");
 	    	}
 	});
 	$(document).on('mouseover','.session-follow',function(){

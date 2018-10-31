@@ -2,9 +2,9 @@
   <%= link_to value_path(report_id: report, flag: true), method: :post, remote: true do %>
     <div class="high-submit value">
       <% if ReportValue.exists?(user_id: session[:user_id], report_id: report, flag: true) %>
-        <%= image_tag ("after_good.png"), class:"good-image" %>
+        <%= image_tag ("/images/after_good.png"), class:"good-image" %>
       <% else %>
-        <%= image_tag ("before_good.png"), class:"good-image" %>
+        <%= image_tag ("/images/before_good.png"), class:"good-image" %>
       <% end %>
     </div>
   <% end %>
@@ -15,9 +15,9 @@
   <%= link_to value_path(report_id: report, flag: false), method: :post, remote: true do %>
     <div class="low-submit value">
       <% if ReportValue.exists?(user_id: session[:user_id], report_id: report, flag: false) %>
-        <%= image_tag ("after_bad.png"), class:"bad-image" %>
+        <%= image_tag ("/images/after_bad.png"), class:"bad-image" %>
       <% else %>
-        <%= image_tag ("before_bad.png"), class:"bad-image" %>
+        <%= image_tag ("/images/before_bad.png"), class:"bad-image" %>
       <% end %>
     </div>
   <% end %>
