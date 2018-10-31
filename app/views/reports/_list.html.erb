@@ -2,7 +2,7 @@
   <div class="report-image-box">
     <%= link_to user_path(report.user) do %>
       <% if report.user.ctype == nil %>
-        <%= image_tag ('no_image.png'), size: 7*7, class:"report-user-image" %>
+        <%= image_tag ('/images/no_image.png'), size: 7*7, class:"report-user-image" %>
       <% else %>
         <%= image_tag(show_user_image_path(report.user.id), size: 7*7, class:"report-user-image") %>
       <% end %>
@@ -22,22 +22,16 @@
     </div>
     <div class="report-language">
       <%= report.language.name %>
-    </div><br>
+    </div>
+    <% if session[:user_id] != nil %>
+      <%= link_to "RE投稿する", new_sub_report_path(report), remote: true, class:"new-sub-report" %>
+    <% end %>
     <div class="report-body">
       <%= report.body %>
     </div>
-    <% if session[:user_id] != nil %>
-      <button class="sub-report-button button">RE投稿する</button>
-      <div class="sub-report-form">
-        <%= form_for (@sub_report), url:sub_report_path(report, report_id: report.id) do |f| %>
-          <%= f.text_area :body ,class:"sub-report-body-form"%><br>
-          <%= f.submit "RE投稿する",class:"sub-report-submit"%>
-        <% end %>
-        <button class="close-sub-report-button">閉じる</button>
-      </div>
-    <% end %>
     <div class="value-action<%= report.id %>">
       <%= render "reports/report_value", report: report %>
     </div>
   </div>
 </div>
+<div class="new-sub-create"></div>

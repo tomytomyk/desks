@@ -8,13 +8,9 @@
     <% if @user.id != session[:user_id] %>
       <div class="follow">
         <% if Relationship.exists?(followed_id: @user.id, follower_id: session[:user_id]) %>
-          <%= form_for @relationship, url: user_follow_destroy_path(@user), method: :get do |f| %>
-            <%= f.submit "フォロー解除", class:"follow-submit" %>
-          <% end %>
+          <%= link_to "フォロー解除", user_follow_destroy_path(@user), class:"follow-submit ing" %>
         <% else %>
-          <%= form_for @relationship, url: user_followed_path(@user), method: :get do |f| %>
-            <%= f.submit "フォローする", class:"follow-submit" %>
-          <% end %>
+          <%= link_to "フォローする", user_followed_path(@user), class:"follow-submit" %>
         <% end %>
       </div>
     <% end %>
@@ -29,22 +25,22 @@
     <div class="user-login-time">
       最終ログイン
       <% if @user.login_time != nil %>
-      <% t = Time.now - @user.login_time %>
-      <% if 0 <= t && t < 60 %>
-        <%= t %>秒前
-      <% elsif 60 <= t && t < 3600 %>
-        <%= (t / 60).floor %>分前
-      <% elsif 3600 <= t && t< 86400 %>
-        <%= (t / 3600).floor %>時間前
-      <% elsif %>
-        <%= (t / 86400).floor %>日前
-      <% end %>
+        <% t = Time.now - @user.login_time %>
+        <% if 0 <= t && t < 60 %>
+          <%= t.floor %>秒前
+        <% elsif 60 <= t && t < 3600 %>
+          <%= (t / 60).floor %>分前
+        <% elsif 3600 <= t && t< 86400 %>
+          <%= (t / 3600).floor %>時間前
+        <% elsif %>
+          <%= (t / 86400).floor %>日前
+        <% end %>
       <% end %>
     </div>
-    <button class="user-follow button">
-      フォロー
+    <div class="user-follow button">
+      フォロー<br>
       <%= @user.followed_relationships.count %>
-    </button>
+    </div>
     <div class="user-follow-index">
     <table>
       <% @user.followed_relationships.each do |relationship| %>
@@ -57,17 +53,17 @@
             <% end %>
           </td>
           <td>
-            <%= relationship.followed.name %>
+            <%= link_to relationship.followed.name, user_path(relationship.followed.id) %>
           </td>
         </tr>
       <% end %>
     </table>
       <button class="close-sub-report-button">閉じる</button>
     </div>
-    <button class="user-follower button">
-      フォロワー
+    <div class="user-follower button">
+      フォロワー<br>
       <%= @user.follower_relationships.count %>
-    </button>
+    </div>
     <div class="user-follower-index">
       <table>
         <% @user.follower_relationships.each do |relationship| %>
@@ -80,7 +76,7 @@
               <% end %>
             </td>
             <td>
-              <%= relationship.follower.name %>
+              <%= link_to relationship.follower.name, user_path(relationship.follower.id) %>
             </td>
           </tr>
         <% end %>
@@ -88,13 +84,13 @@
       <button class="close-sub-report-button">閉じる</button>
     </div>
     <% if @user.id == session[:user_id] %>
-      <button class="user-edit-button button">編集する</button>
+      <div class="user-edit-button button">編集する</div>
       <div class="user-edit">
         <%= render "users/edit", user: @user %>
       </div>
-      <button class="view-history button">
+      <div class="view-history button">
         閲覧履歴
-      </button>
+      </div>
       <div class="view-history-info">
         <table>
           <% @user.watchs.each do |watch| %>
@@ -107,10 +103,10 @@
                 <% end %>
               </td>
               <td>
-                <%= watch.report.user.name %>
+                <%= link_to watch.report.user.name, user_path(watch.report.user.id) %>
               </td>
               <td>
-                <%= watch.report.title %>
+                <%= link_to watch.report.title, report_path(watch.report.id) %>
               </td>
             </tr>
           <% end %>
@@ -123,7 +119,7 @@
 <div class="new-sub-create"></div>
 <div class="value"></div>
 <div class="users-report">
-  <% @user.reports.each do |report| %>
+  <% @user.reports.order(created_at: :desc).each do |report| %>
     <%= render "reports/list", report: report %>
   <% end %>
 </div>

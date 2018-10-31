@@ -1,14 +1,14 @@
 ジャンル一覧
 <% @genres.each do |genre| %>
-	<%= genre.name %>
+  <%= genre.name %>
 <% end %>
 メーカー一覧
 <% @makers.each do |maker| %>
-    <%= maker.name %>
-    <%= maker.maker_url %>
+  <%= maker.name %>
+  <%= maker.maker_url %>
 <% end %>
 職種一覧
 <% @occupations.each do |occupation| %>
-	<%= occupation.name %>
+  <%= occupation.name %>
 <% end %>
 <%= link_to "戻る", admins_index_path %>

@@ -35,7 +35,7 @@
           <%= link_to "LOG IN", top_path, class:"nav-list-link" %>
         </nav>
       <% end %>
-      <nav  class="nav-list language">
+      <nav  class="nav-list  language">
         <div class="nav-list-link">
           LANGUAGE
         </div>
@@ -46,12 +46,12 @@
         </div>
       </nav>
     </header>
-    <div class="language-list">
+    <div class="language-list list">
       <% Language.all.each do |language| %>
         <%= link_to language.name, languages_path(language.id,language_id: language.id), class:"select-language" %>
       <% end %>
     </div>
-    <div class="occupation-list">
+    <div class="occupation-list list">
       <% Occupation.all.each do |occupation| %>
         <%= link_to occupation.name, users_index_path(occupation.id),class:"select-occupation" %>
       <% end %>
@@ -63,7 +63,7 @@
       <% if session[:user_id] != nil %>
         <%= link_to user_path(session[:user_id]) do %>
           <% if User.find(session[:user_id]).ctype == nil %>
-            <%= image_tag ('no_image.png'), size: 14*14, class:"session-user-image" %>
+            <%= image_tag ('/images/no_image.png'), size: 14*14, class:"session-user-image" %>
           <% else %>
             <%= image_tag(show_user_image_path(session[:user_id]), size: 14*14, class:"session-user-image" ) %>
           <% end %>
@@ -84,13 +84,14 @@
           </div>
         </div>
       <% else %>
-        <%= image_tag ('no_image.png'), size: 14*14 %>
+        <%= image_tag ('/images/no_image.png'), size: 14*14 %>
       <% end %>
       <h1>
         HOT LANGUAGE
       </h1>
       <% @languages = Language.all %>
       <% e = [] %>
+      <% n = Time.now %>
       <% @languages.each do |language| %>
         <% a = language.view %>
         <% b = 0 %>
@@ -105,7 +106,7 @@
       <% f = e.in_groups_of(2) %>
       <% g = f.sort.reverse{|a, b| a[0] <=> b[0]} %>
       <table>
-        <% g.each do |g1, g2| %>
+        <% g.first(10).each do |g1, g2| %>
           <tr>
             <td>
               <%= link_to Language.find(g2).name, languages_path(g2, language_id: g2) %>
@@ -124,7 +125,7 @@
           <div class="follower-info-box">
             <%= link_to user_path(relationship.follower.id) do %>
               <% if relationship.follower.ctype == nil %>
-                <%= image_tag ('no_image.png'), class:"follower-image", size: 7*7 %>
+                <%= image_tag ('/images/no_image.png'), class:"follower-image", size: 7*7 %>
               <% else %>
                 <%= image_tag(show_user_image_path(relationship.follower.id), class:"follower-image", size: 7*7) %>
               <% end %>
@@ -142,7 +143,7 @@
           <div class="follower-info-box">
             <%= link_to user_path(relationship.follower.id) do %>
               <% if relationship.follower.ctype == nil %>
-                <%= image_tag ('no_image.png'), class:"follower-image", size: 7*7 %>
+                <%= image_tag ('/images/no_image.png'), class:"follower-image", size: 7*7 %>
               <% else %>
                 <%= image_tag(show_user_image_path(relationship.follower.id), class:"follower-image", size: 7*7) %>
               <% end %>

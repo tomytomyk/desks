@@ -1,6 +1,6 @@
 <%= link_to "戻る", admins_index_path %>
 <% @words.each do |word| %>
-<%= word.id %>
-<%= word.character %>
-<%= link_to "削除", word_destroy_path(word), method: :delete %><br>
+  <%= word.id %>
+  <%= word.character %>
+  <%= link_to "削除", word_destroy_path(word), method: :delete %><br>
 <% end %>
