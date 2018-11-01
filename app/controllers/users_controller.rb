@@ -84,6 +84,15 @@ class UsersController < ApplicationController
     redirect_to user_path(params[:user_id])
   end
 
+  def image_update
+    user = User.find(params[:id])
+    user.top = params[:user][:top]
+    user.left = params[:user][:left]
+    user.size = params[:user][:size]
+    user.save
+    redirect_to user_path(user.id)
+  end
+
 	private
     def user_params
       params.require(:user).permit(:name, :password, :occupation_id, :image_id, :flag, :login_time)

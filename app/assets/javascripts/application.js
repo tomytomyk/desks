@@ -17,6 +17,56 @@
 //= require jquery
 //= require jquery_ujs
 $(function() {
+	$(document).on('keydown',window,function(e){
+		if(e.keyCode === 37){
+		$('.edit-cursor').animate({'left':'-=3px'},1);{
+			    $('.a').val($('.edit-cursor').position().left);
+		    }
+	    }
+		if(e.keyCode === 38){
+		$('.edit-cursor').animate({'top':'-=3px'},1);{
+			    $('.b').val($('.edit-cursor').position().top);
+		    }
+        }
+		if(e.keyCode === 39){
+		$('.edit-cursor').animate({'left':'+=3px'},1);{
+			    $('.a').val($('.edit-cursor').position().left);
+		    }
+        }
+		if(e.keyCode === 40){
+		$('.edit-cursor').animate({'top':'+=3px'},1);{
+			    $('.b').val($('.edit-cursor').position().top);
+		    }
+	    }
+		if(e.keyCode === 188){
+		$('.edit-cursor').animate({'height':'200px'},{queue: false}).animate({'width':'200px'},{queue: false});{
+			    $('.c').val($('.edit-cursor').width());
+			    $('.a').val($('.edit-cursor').position().left);
+			    $('.b').val($('.edit-cursor').position().top);
+		    }
+		}
+		if(e.keyCode === 190){
+		$('.edit-cursor').animate({'height':'0%'},{queue: false}).animate({'width':'0%'},{queue: false});{
+			    $('.c').val($('.edit-cursor').width());
+			    $('.a').val($('.edit-cursor').position().left);
+			    $('.b').val($('.edit-cursor').position().top);
+		    }
+        }
+	});
+	$(document).on('keyup',window,function(e){
+		if(e.keyCode === 37){
+		$('.edit-cursor').stop();}
+		if(e.keyCode === 38){
+		$('.edit-cursor').stop();}
+		if(e.keyCode === 39){
+		$('.edit-cursor').stop();}
+		if(e.keyCode === 40){
+		$('.edit-cursor').stop();}
+		if(e.keyCode === 188){
+		$('.edit-cursor').stop();}
+		if(e.keyCode === 190){
+		$('.edit-cursor').stop();}
+	});
 
 	$(document).on('click','.no-login-select',function(){
 		$('.no-login-box').css({'display': 'block'});

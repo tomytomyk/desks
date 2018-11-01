@@ -61,13 +61,9 @@
     </main>
     <div class="sidebar">
       <% if session[:user_id] != nil %>
-        <%= link_to user_path(session[:user_id]) do %>
-          <% if User.find(session[:user_id]).ctype == nil %>
-            <%= image_tag ('/images/no_image.png'), size: 14*14, class:"session-user-image" %>
-          <% else %>
-            <%= image_tag(show_user_image_path(session[:user_id]), size: 14*14, class:"session-user-image" ) %>
-          <% end %>
-        <% end %>
+          <div class="session-image-box" >
+          <%= render "users/image", user: session[:user_id] %>
+        </div>
         <div class="session-user-name">
           <%= link_to User.find(session[:user_id]).name ,user_path(session[:user_id]) %>
         </div>

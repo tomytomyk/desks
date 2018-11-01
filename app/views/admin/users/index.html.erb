@@ -5,7 +5,9 @@
 	<th>イメージ</th>
 	<th>ID</th>
 	<th>名前</th>
-	<th>職種</th>
+  <th>職種</th>
+  <th>フォロー</th>
+	<th>フォロワー</th>
   <th>最終ログイン</th>
 	<th>退会</th>
 	<th>管理</th>
@@ -23,8 +25,23 @@
   	  <td><%= user.name %></td>
       <td><%= user.occupation.name %></td>
       <td>
-        <% if user.flag == 1 %>
-          退会済み
+        <%= user.followed_relationships.count %>
+      </td>
+      <td>
+        <%= user.follower_relationships.count %>
+      </td>
+      <td>
+        <% if user.login_time != nil %>
+          <% t = Time.now - user.login_time %>
+          <% if 0 <= t && t < 60 %>
+            <%= t.floor %>秒前
+          <% elsif 60 <= t && t < 3600 %>
+            <%= (t / 60).floor %>分前
+          <% elsif 3600 <= t && t< 86400 %>
+            <%= (t / 3600).floor %>時間前
+          <% elsif %>
+            <%= (t / 86400).floor %>日前
+          <% end %>
         <% end %>
       </td>
       <td>
@@ -32,6 +49,11 @@
           <%= link_to "復活",user_change_path(user), method: :post %>
         <% else user.flag == 0 %>
           <%= link_to "削除",user_change_path(user), method: :post %>
+        <% end %>
+      </td>
+      <td>
+        <% if user.flag == 1 %>
+          退会済み
         <% end %>
       </td>
     </tr>

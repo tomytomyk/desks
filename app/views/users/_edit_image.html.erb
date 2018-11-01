@@ -1,0 +1,21 @@
+<div class="image-edit-box">
+  <div class="edit-cursor"></div>
+  <%= image_tag(show_user_image_path(user.id), class:"user-edit-image") %>
+</div>
+<div class="image-ope-box">
+	キーボードでカーソルを操作してね<br>
+	<div style="margin-left: 20px;">
+	  ⬆︎：上<br>
+	  ➡︎：右<br>
+      ⬇︎：下<br>
+      ⬅︎：左<br>
+	  <：大きくなる<br>
+	  >：小さくなる<br>
+    </div>
+	<%= form_tag update_image_path(user.id) do %>
+	  <input type="hidden" name="user[left]" class="a" value="0">
+	  <input type="hidden" name="user[top]" class="b" value="0">
+	  <input type="hidden" name="user[size]" class="c" value="100">
+	<%= submit_tag "登録する" %>
+	<% end %>
+</div>

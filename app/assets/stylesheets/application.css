@@ -13,38 +13,7 @@
  *= require_tree .
  *= require_self
  */
-.box1{
-	height: 100px;
-	width: 100px;
-	background-color: blue;
-	position: absolute;
-}
-.box2{
-	height: 100px;
-	width: 100px;
-	background-color: red;
-}
-.box3{
-	height: 100px;
-	width: 100px;
-	background-color: yellow;
-}
-.box4{
-	height: 100px;
-	width: 100px;
-	background-color: black;
-}
-.box5{
-	height: 100px;
-	width: 100px;
-	background-color: grey;
-}
-.box-box{
-	height: 200px;
-	width: 100%;
-	background-color: pink;
-	position: relative;
-}
+
 .clearfix::after {
     content: "";
     display: block;
@@ -147,8 +116,17 @@ main{
 	height:120%;
 	background-color:rgba(0,0,0,0.75);
 }
+.session-image-box{
+	margin-left: calc(50% - 98px);
+	width: 196px;
+	height: 196px;
+	position: relative;
+	background-color: pink;
+    overflow: hidden;
+}
 .session-user-image{
-	padding-left: calc(50% - 98px);
+    max-width: 100%;
+    min-height: 100%;
 }
 .report-box{
 	width: 90%;

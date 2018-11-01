@@ -42,5 +42,5 @@ Rails.application.routes.draw do
   get "user/:id/show_image" => "users#show_image", as:"show_user_image"
   post "admin/users/:id" => "admin/users#change_user", as:"user_change"
   get "reports/:id/report_value" => "reports#value_show", as:"value_show"
-  post "user/:id/image" => "users#image_update", as:"update_image"
+  post "user/image/:id" => "users#image_update", as:"update_image"
 end

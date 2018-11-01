@@ -1,10 +1,10 @@
 <% @users.each do |user| %>
   <div class="user-index">
-    <%= link_to user_path(sub_report.user.id) do %>
+    <%= link_to user_path(user.id) do %>
       <% if user.ctype == nil %>
-        <%= image_tag ('no_image.png'), size: 5*5, class:"user-image" %>
+        <%= image_tag ('no_image.png'), size: 10*10, class:"user-image" %>
       <% else %>
-        <%= image_tag(show_user_image_path(user.id), size: 5*5, class:"user-image") %>
+        <%= image_tag(show_user_image_path(user.id), size: 10*10, class:"user-image") %>
       <% end %>
     <% end %>
     <%= link_to user.name, user_path(user.id) %>
