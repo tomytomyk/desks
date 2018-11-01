@@ -30,6 +30,9 @@
     cursor: pointer;
     color: #ffffff;
 }
+.no-login-select:hover{
+	color: yellow;
+}
 .login-select{
 	width: 33%;
 	height: 10%;
@@ -41,6 +44,9 @@
     cursor: pointer;
     color: #ffffff;
 }
+.login-select:hover{
+	color: yellow;
+}
 .signup-select{
 	width: 34%;
 	height: 10%;
@@ -51,6 +57,9 @@
 	background-color: #000000;
     cursor: pointer;
     color: #ffffff;
+}
+.signup-select:hover{
+	color: yellow;
 }
 .no-login-box{
 	width: 100%;
@@ -98,6 +107,9 @@
 	border-color: rgb(216, 216, 216);
 	position: absolute;
 }
+.no-login-link:hover{
+	background-color: yellow;
+}
 .login-form-box{
 	height: 60%;
 	width: 80%;
@@ -127,6 +139,9 @@
 	bottom: 0;
 	cursor: pointer;
 	backgrond-color: #ffffff;
+}
+.login-submit:hover{
+	background-color: yellow;
 }
 .signup-form-box{
 	height: 80%;
@@ -162,6 +177,9 @@
 	position: absolute;
 	bottom: 0;
 	cursor: pointer;
+}
+.signup-submit:hover{
+	background-color: yellow;
 }
 .search-user-box{
 	width: auto;
@@ -362,8 +380,8 @@
 	width: auto;
 	position: fixed;
 	z-index: 100;
-    top: 40vh;
-    left: 5%;
+    top: 35vh;
+    left: 20%;
     background-color: #ffffff;
 }
 .user-edit-image{
@@ -378,11 +396,12 @@
 	border-color: yellow;
 	z-index: 101;
 }
-.edit-cursor1{
-    position: absolute;
-    background-color: pink;
-	height: 100px;
-	width: 100px;
-	border: yellow;
-	z-index: 101;
+.image-ope-box{
+	position: fixed;
+	height: 300px;
+	width: 300px;
+	z-index: 100;
+	top: 35vh;
+	left: 60%;
+	background-color: #ffffff;
 }

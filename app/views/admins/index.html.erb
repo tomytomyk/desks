@@ -1,4 +1,4 @@
-<h1>ログインおめでとう！</h1>
+<h1>管理者ページ</h1>
 <%= link_to "ユーザー一覧", admin_users_path %>
 <%= link_to "単語一覧", word_index_path %>
 <%= link_to "ログアウト", admins_top_path %>
@@ -17,9 +17,9 @@
   <%= f.text_field :character, placeholder: "単語", autofocus: true %>
   <%= f.submit '単語登録' %>
 <% end %>
-<div class="language-update">
+<div class="language-update" style="float: left">
   <%= render "admins/language", languages: @languages %>
 </div>
-<div class="occupation-update">
+<div class="occupation-update" style="float: left; padding-left: 100px;">
   <%= render "admins/occupation", occupations: @occupations %>
 </div>
