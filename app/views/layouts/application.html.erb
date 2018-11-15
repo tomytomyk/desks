@@ -62,7 +62,7 @@
     <div class="sidebar">
       <% if session[:user_id] != nil %>
           <div class="session-image-box" >
-          <%= render "users/image", user: session[:user_id] %>
+          <%= render "users/image", user: session[:user_id], s: 14 %>
         </div>
         <div class="session-user-name">
           <%= link_to User.find(session[:user_id]).name ,user_path(session[:user_id]) %>
@@ -116,16 +116,11 @@
     </div>
     <% if session[:user_id] != nil %>
       <div class="session-follower-info">
-        一覧
         <% User.find(session[:user_id]).follower_relationships.each do |relationship| %>
           <div class="follower-info-box">
-            <%= link_to user_path(relationship.follower.id) do %>
-              <% if relationship.follower.ctype == nil %>
-                <%= image_tag ('/images/no_image.png'), class:"follower-image", size: 7*7 %>
-              <% else %>
-                <%= image_tag(show_user_image_path(relationship.follower.id), class:"follower-image", size: 7*7) %>
-              <% end %>
-            <% end %>
+            <div class="report-image-square <%= relationship.follower.id %>">
+              <%= render "users/image", user: relationship.follower.id, s: 7 %>
+            </div>
             <div class="follower-name">
               <%= link_to relationship.follower.name, user_path(relationship.follower) %>
             </div>
@@ -134,16 +129,11 @@
         <button class="close-sub-report-button">閉じる</button>
       </div>
       <div class="session-follow-info">
-        一覧
         <% User.find(session[:user_id]).followed_relationships.each do |relationship| %>
           <div class="follower-info-box">
-            <%= link_to user_path(relationship.follower.id) do %>
-              <% if relationship.follower.ctype == nil %>
-                <%= image_tag ('/images/no_image.png'), class:"follower-image", size: 7*7 %>
-              <% else %>
-                <%= image_tag(show_user_image_path(relationship.follower.id), class:"follower-image", size: 7*7) %>
-              <% end %>
-            <% end %>
+              <div class="report-image-square <%= relationship.followed.id %>" style="float:left">
+                <%= render "users/image", user: relationship.followed.id, s: 7 %>
+              </div>
             <div class="follower-name">
               <%= link_to relationship.followed.name, user_path(relationship.followed) %>
             </div>

@@ -17,6 +17,10 @@
 //= require jquery
 //= require jquery_ujs
 $(function() {
+	$(document).on('click','body',function(){
+		$('.top-text').fadeIn(5);
+		$('.top-text').animate({'width':'750px'},1000);
+	});
 	$(document).on('keydown',window,function(e){
 		if(e.keyCode === 37){
 		$('.edit-cursor').animate({'left':'-=3px'},1);{
@@ -83,16 +87,13 @@ $(function() {
 		$('.login-box').css({'display': 'none'});
 		$('.signup-box').css({'display': 'block'});
 	});
-	$('header').animate({'width': '15%'}, 2000);
-	$('.nav-list').mouseover(function(){
+	$(document).on('mouseover','.nav-list',function(){
 		$(this).css({'background-color': 'yellow'});
-		$(this).animate({'width': '100%'}, 80);
 	});
-	$('.nav-list').mouseout(function(){
+	$(document).on('mouseout','.nav-list',function(){
 		$(this).css({'background-color': ''});
-		$(this).animate({'width': '100%'}, 80);
 	});
-	$('.nav-list').hover(function(){
+	$(document).on('mouseover','.nav-list',function(){
 		if($(this).hasClass('language')){
 			$('.language-list').css('display', 'block');
 		} else if($(this).hasClass('occupation')){
@@ -106,8 +107,9 @@ $(function() {
 				$('.occupation-list').css('display', 'block');
 				$('.language-list').css('display', 'none');
 			}
-		})
-	},function(){
+		});
+	});
+	$(document).on('mouseout','.nav-list',function(){
 	    $('.list').hover(function(){
 		}, function(){
 		    $('.list').css('display', 'none');

@@ -22,7 +22,6 @@ class User < ApplicationRecord
     private
       def file_invalid?
       	if self.photo == nil
-      		true
       	else
       	ps = ["image/jpeg", "image/gif", "image/png"]
       	errors.add(:image_id,'') if !ps.include?(self.ctype)

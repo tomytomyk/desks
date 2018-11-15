@@ -3,13 +3,9 @@
     <% report_values.each do |report_value| %>
       <tr class="value-single">
 		<td>
-		  <%= link_to user_path(report_value.user.id) do %>
-		    <% if report_value.user.ctype == nil %>
-		      <%= image_tag ('/images/no_image.png'), size: 7*7, class:"report-user-image" %>
-		    <% else %>
-		      <%= image_tag(show_user_image_path(report_value.user.id), size: 7*7, class:"report-user-image") %>
-		    <% end %>
-		  <% end %>
+          <div class="report-image-square <%= report_value.id %>">
+            <%= render "users/image", user: report_value.user.id, s: 7 %>
+          </div>
 		</td>
 		<td>
 		  <%= report_value.user.name %>

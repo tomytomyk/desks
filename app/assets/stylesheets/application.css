@@ -143,6 +143,12 @@ main{
     width: 7%;
     float: left;
 }
+.report-image-square{
+	width: 49px;
+	height: 49px;
+   	position: relative;
+	overflow: hidden;
+}
 .report-info-box{
 	height: 100%;
 	width: 80%;
@@ -271,14 +277,8 @@ main{
 .follower-info-box{
 	width: 80%;
 	height: 5vh;
-	border-top: solid;
-	border-bottom: solid;
 	margin-top: 2vh;
 	margin-left: 10%;
-}
-.follower-image{
-	height: 100%;
-	float: left;
 }
 .follower-name{
 	float:left;

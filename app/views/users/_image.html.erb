@@ -1,16 +1,16 @@
 <%= link_to user_path(user) do %>
   <% if User.find(user).ctype == nil %>
-    <%= image_tag ('/images/no_image.png'), size: 14*14, class:"session-user-image" %>
+    <%= image_tag ('/images/no_image.png'), size: s*s, class:"session-user-image" %>
   <% else %>
     <% x = User.find(user).left %>
     <% y = User.find(user).top %>
     <% z = User.find(user).size %>
     <% if x != nil && y != nil  && z != nil %>
-      <div style="width: <%= 196 * 400 / z %>px; left: -<%= 196 * x  / z %>px; top: -<%= 196 * y  / z %>px; position: absolute;">
+      <div style="width: <%= s * s * 400 / z %>px; left: -<%= s * s * x  / z %>px; top: -<%= s * s * y  / z %>px; position: absolute;">
         <%= image_tag(show_user_image_path(user), class:"session-user-image") %>
       </div>
     <% else %>
-      <%= image_tag(show_user_image_path(user)) %>
+      <%= image_tag(show_user_image_path(user), size: s*s, class:"session-user-image") %>
     <% end %>
   <% end %>
 <% end %>

@@ -1,12 +1,8 @@
 <div class="report-box">
   <div class="report-image-box">
-    <%= link_to user_path(report.user) do %>
-      <% if report.user.ctype == nil %>
-        <%= image_tag ('/images/no_image.png'), size: 7*7, class:"report-user-image" %>
-      <% else %>
-        <%= image_tag(show_user_image_path(report.user.id), size: 7*7, class:"report-user-image") %>
-      <% end %>
-    <% end %>
+    <div class="report-image-square <%= report.id %>">
+      <%= render "users/image", user: report.user.id, s: 7 %>
+    </div>
   </div>
   <div class="report-info-box">
     <% if report.user.flag == 1 %>
@@ -34,4 +30,3 @@
     </div>
   </div>
 </div>
-<div class="new-sub-create"></div>
