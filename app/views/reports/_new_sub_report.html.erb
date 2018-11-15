@@ -1,5 +1,5 @@
 <div class="sub-report-form">
-  <%= form_for (@sub_report), url:sub_report_path(report, report_id: report.id) do |f| %>
+  <%= form_for (sub_report), url:sub_report_path(report, report_id: report.id) do |f| %>
     <%= f.text_area :body ,class:"sub-report-body-form"%><br>
     <%= f.submit "RE投稿する",class:"sub-report-submit"%>
   <% end %>

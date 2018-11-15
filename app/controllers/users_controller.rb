@@ -61,7 +61,7 @@ class UsersController < ApplicationController
         end
     else
       user.data(user_params[:image_id])
-      user.update(user_params)
+      user.save
       redirect_to user_path(user)
     end
   end

@@ -1,12 +1,8 @@
 <% @users.each do |user| %>
   <div class="user-index">
-    <%= link_to user_path(user.id) do %>
-      <% if user.ctype == nil %>
-        <%= image_tag ('no_image.png'), size: 10*10, class:"user-image" %>
-      <% else %>
-        <%= image_tag(show_user_image_path(user.id), size: 10*10, class:"user-image") %>
-      <% end %>
-    <% end %>
+    <div class="user-index-image-square <%= user.id %>">
+      <%= render "users/image", user: user.id, s: 10 %>
+    </div>
     <%= link_to user.name, user_path(user.id) %>
     <%= user.occupation.name %>
       フォロー

@@ -1,13 +1,9 @@
 <% if @users != nil %>
   <% @users.last(5).each do |user| %>
     <div class="search-user-box">
-      <%= link_to user_path(user.id) do %>
-        <% if user.ctype == nil %>
-          <%= image_tag ('/images/no_image.png'), size: 9*9, class:"user-image" %>
-        <% else %>
-          <%= image_tag(show_user_image_path(user.id), size: 9*9, class:"user-image") %>
-        <% end %>
-      <% end %>
+      <div class="search-user-square <%= user.id %>">
+        <%= render "users/image", user: user.id, s: 9 %>
+      </div>
       <div class="search-user-name">
         <%= link_to user.name, user_path(user.id) %>
       </div>
@@ -18,4 +14,3 @@
   <%= render"reports/list", report: report %>
 <% end %>
 <div class="new-sub-create"></div>
-
